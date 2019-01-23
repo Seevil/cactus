@@ -1,0 +1,22 @@
+{
+    "name": "WEB BANG! BANG!! BANG!!!",
+    "short_name": "前端大爆炸",
+    "theme_color": "#1d1f21",
+    "background_color": "#1d1f21",
+    "display": "standalone",
+    "Scope": "/",
+    "start_url": "/",
+    "icons": [{
+        "src": "images50x50.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }, {
+        "src": "images50x50.png",
+        "sizes": "128x128",
+        "type": "image/png"
+    }, {
+        "src": "images50x50.png",
+        "sizes": "96x96",
+        "type": "image/png"
+    }]
+}
