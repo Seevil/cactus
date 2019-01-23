@@ -11,7 +11,7 @@
         <meta name="keywords" content="<?php $this->options->keywords() ?>">
         <meta property="og:locale" content="zh_CN">
         <meta property="og:title" content="<?php $this->options->title(); ?>">
-        <meta property="og:image" content="./images/logo.png">
+        <meta property="og:image" content="<?php $this->options->themeUrl('images/logo.png'); ?>">
         <meta property="og:description" content="<?php $this->options->description() ?>">
         <meta property="og:site_name" content="<?php $this->author(); ?>">
         <?php $this->header('keywords=&generator=&template=&pingback=&xmlrpc=&wlw=&commentReply=&rss1=&rss2=&atom='); ?>
@@ -35,5 +35,4 @@
                 }
             }, true);
         </script>
-<?php $this->header(); ?>
     </head>
