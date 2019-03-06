@@ -32,14 +32,14 @@ function threadedComments($comments, $options) {
 			<img class="vimg" src="<?php echo $avatar ?>">
 			<div class="vh">
 				<div class="vhead">
-					<span class="vnick"><?php $comments->author('', false); ?></span><span class="vsys"><?php echo getBrowser($comments->agent); ?></span><span class="vsys"><?php echo getOs($comments->agent); ?></span>
+					<span class="vnick"><?php $comments->author(); ?></span><span class="vsys"><?php echo getBrowser($comments->agent); ?></span><span class="vsys"><?php echo getOs($comments->agent); ?></span>
 				</div>
-				<div class="vmeta">
+				<div class="vmeta" >
 					<span class="vtime"><?php $comments->dateWord(); ?></span>
-					<span rid="<?php $comments->theId(); ?>" cid="<?php $comments->theId(); ?>" class="vat"><?php $comments->reply('回复'); ?></span>
+					<span class="vat"><?php $comments->reply('回复'); ?></span>
 				</div>
 				<div class="vcontent">
-					<p><?php $comments->content(); ?></p>
+					<?php showCommentContent($comments->coid); ?>
 				</div>
 			</div>
 		</div>
@@ -50,7 +50,7 @@ function threadedComments($comments, $options) {
 <?php } ?>
 <?php $this->comments()->to($comments); ?>
 <?php if($this->allow('comment')): ?>	
-<div class="blog-post-comments v">
+<div class="blog-post-comments v" id="<?php $this->respondId(); ?>">
 <form  method="post" action="<?php $this->commentUrl() ?>" id="comment-form">
 	<?php if($this->user->hasLogin()): ?>
 	<?php _e('登录身份: '); ?><h5><a href="<?php $this->options->profileUrl(); ?>"><?php $this->user->screenName(); ?></a>. <a href="<?php $this->options->logoutUrl(); ?>" title="Logout"><?php _e('退出'); ?> &raquo;</a></h5>
@@ -67,7 +67,6 @@ function threadedComments($comments, $options) {
 			<div class="col col-80 text-right">
 			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">回复</button>
 			<?php $security = $this->widget('Widget_Security'); ?>
-			<input type="hidden" name="_" value="<?php echo $security->getToken($this->request->getReferer())?>">
 			</div>
 		</div>
 		<div style="display:none;" class="vmark">
@@ -87,9 +86,10 @@ function threadedComments($comments, $options) {
 				<a href="https://segmentfault.com/markdown" target="_blank"><svg class="markdown" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path></svg></a>
 			</div>
 			<div class="col col-80 text-right">
+			<?php spam_protection_math();?>
 			<button type="submit" title="Cmd|Ctrl+Enter" class="vsubmit vbtn" id="misubmit">回复</button>
 			<?php $security = $this->widget('Widget_Security'); ?>
-			<input type="hidden" name="_" value="<?php echo $security->getToken($this->request->getReferer())?>">
+			
 			</div>
 		</div>
 		
@@ -106,5 +106,13 @@ function threadedComments($comments, $options) {
 	<?php if ($comments->have()): ?>
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
+		 <div class="pagination">
+					 <?php if($comments->_currentPage>1): ?>
+					 <?php if($comments->_currentPage>1): ?>
+					<a href="<?php $comments->pageLink('Previous'); ?>"><i class="fa fa-angle-left"></i></a><?php endif; ?>
+					<span class="page-number"><?php if($comments->_currentPage>0) echo 'Page '.$comments->_currentPage.' of '; ?><?php echo ceil($comments->getTotal() / $comments->parameter->pageSize); ?></span>
+					<a href="<?php $comments->pageLink('Next','next'); ?>"><i class="fa fa-angle-right"></i></a>
+					<?php endif; ?>
+				</div>
 </div>
 <?php endif; ?>

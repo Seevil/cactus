@@ -13,7 +13,7 @@ $this->need('header.php');
                 <a href="/">
                     <div id="logo" style="background-image: url(<?php $this->options->themeUrl('images/logo.png'); ?>);"></div>
                     <div id="title">
-                        <h1><?php $this->category() ?></h1>
+                        <h1>Archives</h1>
                     </div>
                 </a>
                 <div id="nav">
@@ -27,9 +27,10 @@ $this->need('header.php');
                             <a href="/">Home</a>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
-                        <li>
-                            <a href="http://github.com/Fantasy9527" target="_blank">Github</a>
-                        </li>
+                        <?php if($this->options->github): ?>
+						<li>
+                         <a href="<?php $this->options->github();?>" target="_blank">Github</a>
+                        </li><?php endif; ?>
                     </ul>
                 </div>
             </header>

@@ -1,20 +1,26 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 function themeConfig($form) {
-    $logoUrl = new Typecho_Widget_Helper_Form_Element_Text('logoUrl', NULL, NULL, _t('页头logo地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则使用站点名称'));
-    $form->addInput($logoUrl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    $footerLogoUrl = new Typecho_Widget_Helper_Form_Element_Text('footerLogoUrl', NULL, NULL, _t('页尾logo地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则使用站点名称'));
-    $form->addInput($footerLogoUrl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    $favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('favicon地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则不设置favicon'));
+    $logoimg = new Typecho_Widget_Helper_Form_Element_Text('logoimg', NULL, NULL, _t('页头logo地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则使用站点名称'));
+    $form->addInput($logoimg->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+    $favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('favicon地址'), _t('一般为http://www.yourblog.com/image.ico,支持 https:// 或 //,留空则不设置favicon'));
     $form->addInput($favicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    $iosicon = new Typecho_Widget_Helper_Form_Element_Text('iosicon', NULL, NULL, _t('apple touch icon地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则不设置Apple Touch Icon'));
-    $form->addInput($iosicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    $pjaxSet = new Typecho_Widget_Helper_Form_Element_Radio('pjaxSet',
-        array('able' => _t('启用'),
-            'disable' => _t('禁止'),
-        ),
-        'disable', _t('PJAX加速设置'), _t('默认禁止，若启用则需提前到关闭‘开启反垃圾保护’,开关在‘设置-评论’'));
-    $form->addInput($pjaxSet);
+    $favicons = new Typecho_Widget_Helper_Form_Element_Text('favicons', NULL, NULL, _t('favicon png格式地址 192x192'), _t('一般为http://www.yourblog.com/image.png, 支持 https:// 或 //,留空则不设置favicon'));
+    $form->addInput($favicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+    $appleicon = new Typecho_Widget_Helper_Form_Element_Text('appleicon', NULL, NULL, _t('apple touch icon地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则不设置Apple Touch Icon'));
+    $form->addInput($appleicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	
+	$github = new Typecho_Widget_Helper_Form_Element_Text('github', NULL, NULL, _t('Github地址'), _t('一般为https://github.com/Seevil ,留空则不设置Github地址'));
+    $form->addInput($github->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	$twitter = new Typecho_Widget_Helper_Form_Element_Text('twitter', NULL, NULL, _t('twitter地址'), _t('一般为https://twitter.com/skyurl ,留空则不设置twitter地址'));
+    $form->addInput($twitter->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	$weibo = new Typecho_Widget_Helper_Form_Element_Text('weibo', NULL, NULL, _t('Weibo地址'), _t('一般为http://www.weibo.com/xxx ,留空则不设置Weibo地址'));
+    $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	$urldiy = new Typecho_Widget_Helper_Form_Element_Text('urldiy', NULL, NULL, _t('主页自定义地址'), _t('注意该设置会直接输出设置内容，建议格式为\<a class="icon" href="https://twitter.com/skyurl" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a> 支持 FontAwesome 图标 ,留空则不显示'));
+    $form->addInput($urldiy->addRule('xssCheck', _t('请不要在链接中使用特殊字符')));
+	
+	$Projects = new Typecho_Widget_Helper_Form_Element_Text('Projects', NULL, NULL, _t('首页 Projects 设置'), _t('注意该设置会直接输出设置内容,留空则不显示'));
+    $form->addInput($Projects->addRule('xssCheck', _t('请不要在链接中使用特殊字符')));
 
 
 }
@@ -26,6 +32,7 @@ function themeInit($archive) {
 	if ($archive->is('single')) {  
     $archive->content = createCatalog($archive->content);//文章锚点实现
 }
+	$comment = spam_protection_pre($comment,$post, $result);//数字验证码
 }
 
 function parseContent($obj){
@@ -112,7 +119,7 @@ echo str_replace(array('{permalink}', '{title}'),array($val['permalink'], $val['
 function getBrowser($agent)
 { $outputer = false;
     if (preg_match('/MSIE\s([^\s|;]+)/i', $agent, $regs)) {
-        $outputer = 'IE浏览器';
+        $outputer = 'IE Browser';
     } else if (preg_match('/FireFox\/([^\s]+)/i', $agent, $regs)) {
       $str1 = explode('Firefox/', $regs[0]);
 $FireFox_vern = explode('.', $str1[1]);
@@ -366,7 +373,98 @@ function getCatalog() {
 }
 
 /**
+ * 根据$coid获取链接
+ */
+function getPermalinkFromCoid($coid)
+{
+    $db = Typecho_Db::get();
+    $options = Helper::options();
+    $contents = Typecho_Widget::widget('Widget_Abstract_Contents');
+    $row = $db->fetchRow($db->select('cid, type, author, text')->from('table.comments')->where('coid = ? AND status = ?', $coid, 'approved'));
+    if (empty($row)) {
+        return 'Comment not found!';
+    }
+
+    $cid = $row['cid'];
+    $select = $db->select('coid, parent')->from('table.comments')->where('cid = ? AND status = ?', $cid, 'approved')->order('coid');
+    if ($options->commentsShowCommentOnly) {
+        $select->where('type = ?', 'comment');
+    }
+
+    $comments = $db->fetchAll($select);
+    if ($options->commentsOrder == 'DESC') {
+        $comments = array_reverse($comments);
+    }
+
+    foreach ($comments as $key => $val) {
+        $array[$val['coid']] = $val['parent'];
+    }
+
+    $i = $coid;
+    while ($i != 0) {
+        $break = $i;
+        $i = $array[$i];
+    }
+    $count = 0;
+    foreach ($array as $key => $val) {
+        if ($val == 0) {
+            $count++;
+        }
+
+        if ($key == $break) {
+            break;
+        }
+
+    }
+    $parentContent = $contents->push($db->fetchRow($contents->select()->where('table.contents.cid = ?', $cid)));
+    $permalink = rtrim($parentContent['permalink'], '/');
+    $page = ($options->commentsPageBreak) ? '/comment-page-' . ceil($count / $options->commentsPageSize) : (substr($permalink, -5, 5) == '.html' ? '' : '/');
+    return array("author" => $row['author'], "text" => $row['text'], "href" => "{$permalink}{$page}#{$row['type']}-{$coid}");
+}
+
+/**
+ * 输出评论回复内容，配合 commentAtContent($coid)一起使用
+ * <?php showCommentContent($comments->coid); ?>
+ */
+function showCommentContent($coid)
+{
+    $db = Typecho_Db::get();
+    $result = $db->fetchRow($db->select('text')->from('table.comments')->where('coid = ? AND status = ?', $coid, 'approved'));
+    $text = $result['text'];
+    $atStr = commentAtContent($coid);
+    $_content = Markdown::convert($text);
+    //<p>
+    if ($atStr !== '') {
+        $content = substr_replace($_content, $atStr, 0, 3);
+    } else {
+        $content = $_content;
+    }
+
+    echo $content;
+}
+
+/**
+ * 评论回复加@ 
+ */
+function commentAtContent($coid)
+{
+    $db = Typecho_Db::get();
+    $prow = $db->fetchRow($db->select('parent')->from('table.comments')->where('coid = ? AND status = ?', $coid, 'approved'));
+    $parent = $prow['parent'];
+    if ($parent != "0") {
+        $arow = $db->fetchRow($db->select('author')->from('table.comments')
+            ->where('coid = ? AND status = ?', $parent, 'approved'));
+        $author = $arow['author'];
+        $href = '<p><a  href="#comment-' . $parent . '">@' . $author . '</a> ';
+        return $href;
+    } else {
+        return '';
+    }
+}
+
+/**
  * 输出评论回复/取消回复按钮
+ * <?php commentReply($this); ?>
  */
 function commentReply($archive)
 {
@@ -433,4 +531,28 @@ function commentReply($archive)
     }
 </script>
 ";
+}
+
+//算术验证评论
+
+function spam_protection_math(){
+    $num1=1;
+    $num2=rand(1,9);
+    echo "$num1 + $num2 = ";
+    echo "<input type=\"text\" name=\"sum\" class=\"vnick vinput\" value=\"\" size=\"25\" tabindex=\"4\" style=\" width:70px;\" placeholder=\"计算结果\">\n";
+    echo "<input type=\"hidden\" name=\"num1\" value=\"$num1\">\n";
+    echo "<input type=\"hidden\" name=\"num2\" value=\"$num2\">";
+}
+function spam_protection_pre($comment, $post, $result){
+    $sum=$_POST['sum'];
+    switch($sum){
+        case $_POST['num1']+$_POST['num2']:
+        break;
+        case null:
+        throw new Typecho_Widget_Exception(_t('抱歉：请输入验证码','评论失败'));
+        break;
+        default:
+        throw new Typecho_Widget_Exception(_t('抱歉：验证码错误，请返回重试','评论失败'));
+    }
+    return $comment;
 }

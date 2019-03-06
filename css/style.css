@@ -50,7 +50,7 @@ a {-webkit-tap-highlight-color:transparent;}
 }
 
 .highlight,body,pre {
-    font-family: Menlo,"Meslo LG","Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft yahei",monospace;
+    font-family: Menlo,"Meslo LG","Helvetica Neue",Helvetica,"Microsoft yahei",Arial,sans-serif,monospace;
 }
 
 #footer p,#footer-post #toc-footer,.clearfix:after,.highlight figcaption:after {
@@ -1427,7 +1427,8 @@ pre {
 code {
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    padding: 0 5px
+    padding: 0 5px;
+	font-family: Menlo,"Meslo LG","Helvetica Neue",Helvetica,"Microsoft yahei",Arial,sans-serif,monospace;
 }
 
 pre code {
@@ -1621,4 +1622,28 @@ pre code {
     #more-post-list .dates{
         display: none;
     }
+}
+.v .vlist .vcard .vh .vmeta .vat a{
+    background-image: none;
+	color: #1abc9c;
+}
+.v .vlist .vcard .vhead .vnick a{
+    color: #1abc9c;
+	background-image: none;
+}
+#footer .footer-left a {
+    color: #666;
+	text-decoration: none
+    }
+	
+#footer .footer-left a:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: #1abc9c;
+    -webkit-transition: width .3s ease;
+    transition: width .3s ease;
 }

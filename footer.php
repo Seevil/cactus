@@ -1,7 +1,7 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
- <footer id="footer">
+ <footer id="footer" style="display:block;">
             <div class="footer-left">
-                Copyright © 2019 Xingr
+                Copyright © 2019 By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="http://www.xde.io" target="_blank">Xingr</a>
             </div>
             <div class="footer-right">
                 <nav>
@@ -10,9 +10,9 @@
                             <a href="/">Home</a>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
-                        <li>
-                            <a href="http://github.com/seevil" target="_blank">Github</a>
-                        </li>
+                        <?php if($this->options->github): ?><li>
+                            <a href="<?php $this->options->github();?>" target="_blank">Github</a>
+                        </li><?php endif; ?>
                     </ul>
                 </nav>
             </div>

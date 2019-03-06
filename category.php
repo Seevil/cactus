@@ -6,7 +6,7 @@ $this->need('header.php');
         <div class="content index width mx-auto px3 my4">
             <header id="header">
                 <a href="/">
-                    <div id="logo" style="background-image: url(<?php $this->options->themeUrl('images/logo.png'); ?>);"></div>
+                    <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
                     <div id="title">
                         <h1><?php $this->category() ?></h1>
                     </div>

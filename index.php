@@ -1,6 +1,6 @@
 <?php
 /**
- * Cactus是优雅简洁的主题
+ * 仙人掌(Cactus)是优雅简洁的暗色主题
  * @package Cactus Theme
  * @author Intern
  * @version 1.0.0
@@ -14,7 +14,7 @@ $this->need('header.php');
         <div class="content index width mx-auto px3 my4">
             <header id="header">
                 <a href="/">
-                    <div id="logo" style="background-image: url(<?php $this->options->themeUrl('images/logo.png'); ?>);"></div>
+                     <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
                     <div id="title">
                         <h1><?php $this->options->title(); ?></h1>
                     </div>
@@ -30,9 +30,10 @@ $this->need('header.php');
                             <a href="/">Home</a>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
-                        <li>
-                            <a href="http://github.com/Seevil" target="_blank">Github</a>
-                        </li>
+                        <?php if($this->options->github): ?>
+						<li>
+                         <a href="<?php $this->options->github();?>" target="_blank">Github</a>
+                        </li><?php endif; ?>
                     </ul>
                 </div>
             </header>
@@ -51,19 +52,14 @@ $this->need('header.php');
                         | Find me on
                     </p>
                     <ul id="sociallinks">
-                        &nbsp;
-                        <li>
-                            <a class="icon" target="_blank" href="http://github.com/Seevil" title="github">
-                                <i class="fa fa-github"></i>
-                            </a>
+						<li><?php if($this->options->github): ?><a class="icon" href="<?php $this->options->github();?>" target="_blank" title="github"><i class="fa fa-github"></i></a><?php endif; ?><?php if($this->options->twitter): ?> <a class="icon" href="<?php $this->options->twitter();?>" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a><?php endif; ?><?php if($this->options->weibo): ?> <a class="icon" href="<?php $this->options->weibo();?>" target="_blank" title="weibo"><i class="fa fa-weibo"></i></a><?php endif; ?><?php if($this->options->urldiy): ?> <?php $this->options->urldiy();?><?php endif; ?><?php if($this->options->email): ?> <a class="icon" href="mailto:<?php $this->options->email();?>" target="_blank" title="email"><i class="fa fa-envelope"></i></a><?php endif; ?>
                         </li>
-                    </ul>
-                    .<p></p>
+                    </ul>.<p></p>
                     <p class="prompt ad-text output new-output">p.s. 网站已经支持PWA,可尝试添加到桌面</p>
                 </section>
                 <section id="writing">
                     <span class="h1">
-                        <a href="/archive/">Writing</a>
+                        <a href="archives.html">Writing</a>
                     </span>
                     <ul class="post-list" id="post-list">
 					<?php while($this->next()): ?>
@@ -72,7 +68,7 @@ $this->need('header.php');
                                 <time datetime="<?php $this->date(); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
                             </div>
                             <span>
-                                <a href="<?php $this->permalink() ?>"><?php $this->title(35,'...') ?></a>
+                                <a href="<?php $this->permalink() ?>"><?php $this->title(38,'...') ?></a>
                             </span>
                         </li>
 					 <?php endwhile; ?>
@@ -80,14 +76,17 @@ $this->need('header.php');
                 </section>
                 <section id="projects">
                     <span class="h1">
-                        <a href="http://github.com/Seevil" rel="external nofollow noopener noreferrer" target="_blank">Projects</a>
+                        <a href="#" rel="external nofollow noopener noreferrer" target="_blank">Projects</a>
                     </span>
                     <ul class="project-list">
+					<?php if($this->options->Projects): ?>
                         <li class="project-item">
-                            <a href="https://github.com/Seevil/microfrontend-base-demo" rel="external nofollow noopener noreferrer" target="_blank">Fantasy</a>
+                            <a href="https://github.com/Seevil/fantasy" rel="external nofollow noopener noreferrer" target="_blank">Fantasy</a>
                             : 一款极简Typecho 博客主题
                         </li>
-
+						<?php else : ?>
+						世间无限丹青手，一片伤心画不成。
+					<?php endif; ?>
                     </ul>
                 </section>
             </section>
