@@ -136,7 +136,7 @@ $this->need('header.php');
                             <div class="article-tag-box"></div>
                         </div>
                     </header>
-                    <div class="content" itemprop="articleBody">
+                    <div class="content" itemprop="articleBody" id="post-content">
                         <?php $this->content(); ?>
                         <h2>本文链接：</h2>
                         <a href="<?php $this->permalink() ?>" target="_blank"><?php $this->permalink() ?></a>

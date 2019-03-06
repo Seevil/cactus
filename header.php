@@ -27,8 +27,8 @@
 		<?php if($this->options->favicons): ?><link rel="icon" type="image/png" href="<?php $this->options->favicons();?>" sizes="192x192"><?php endif; ?>
         <?php if($this->options->appleicon): ?><link rel="apple-touch-icon" sizes="180x180" href="<?php $this->options->appleicon();?>"><?php endif; ?>
         <link rel="manifest" href="<?php $this->options->themeUrl('/manifest.json'); ?>">
+		<?php if ($this->is('post')) : ?><link rel="stylesheet" href="<?php $this->options->themeUrl('css/zoom.css'); ?>"><?php endif; ?>
         <link rel="stylesheet" href="<?php $this->options->themeUrl('lib/font-awesome/css/font-awesome.min.css'); ?>">
-        <link rel="stylesheet" href="<?php $this->options->themeUrl('lib/justified-gallery/justifiedGallery.min.css'); ?>">
         <link rel="stylesheet" href="<?php $this->options->themeUrl('css/style.css'); ?>">
         <script src="<?php $this->options->themeUrl('lib/jquery/jquery.min.js'); ?>"></script>
         <script>

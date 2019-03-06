@@ -17,14 +17,24 @@
                 </nav>
             </div>
         </footer>
-        <script src="<?php $this->options->themeUrl('lib/justified-gallery/jquery.justifiedGallery.min.js'); ?>"></script>
-        <script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script>
+
+        <?php if ($this->is('index')) : ?><script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script><?php endif; ?>
         <script src="<?php $this->options->themeUrl('js/main.js'); ?>"></script>
+		<?php if ($this->is('post')) : ?>
+		<script src="<?php $this->options->themeUrl('js/zoom.js'); ?>"></script>
+		
 		<script src="<?php $this->options->themeUrl('lib/highlight.min.js'); ?>"></script>
+		<script>
+		$(function(){
+		$("#post-content img").each(function(){
+		$(this).attr("data-action","zoom");
+		})
+		})
+		</script>
         <script>
             hljs.initHighlightingOnLoad();
         </script>
-       
+       <?php endif; ?>
         <script>
             if ('serviceWorker'in navigator) {
                 window.addEventListener('load', ()=>{
