@@ -1,5 +1,5 @@
 # 仙人掌 Cactus
-🌵一个响应式干净和简洁优雅的typecho主题
+🌵一个响应式干净和简洁优雅的 Typecho主题
 
 演示地址：https://www.xde.io/
 
