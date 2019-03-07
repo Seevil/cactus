@@ -20,5 +20,12 @@
 ![image](https://user-images.githubusercontent.com/7334510/53931223-56317300-40cf-11e9-9c90-f381783bc21e.png)
 
 
+----
+欢迎Star
+
+如果觉得我移植的主题还不错可以支持一下呀~
+
+![13341032392](https://user-images.githubusercontent.com/7334510/53933535-bb8a6180-40d9-11e9-9231-bd02aaca688f.png)
+
   [1]: https://github.com/probberechts/hexo-theme-cactus
   [2]: https://alili.tech/
