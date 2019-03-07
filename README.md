@@ -8,6 +8,16 @@
 主题详情：https://www.xde.io/typecho/cactus.html
 
 演示图片：
+首页：![image](https://user-images.githubusercontent.com/7334510/53931080-ae1baa00-40ce-11e9-8639-3d78f7692cd7.png)
+
+文章页：
+
+![1057402836](https://user-images.githubusercontent.com/7334510/53931207-3bf79500-40cf-11e9-85f8-5a1b7707eaa3.png)
+
+
+归档页：
+
+![image](https://user-images.githubusercontent.com/7334510/53931223-56317300-40cf-11e9-9c90-f381783bc21e.png)
 
 
   [1]: https://github.com/probberechts/hexo-theme-cactus
