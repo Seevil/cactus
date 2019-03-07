@@ -21,8 +21,8 @@
         <?php if ($this->is('index')) : ?><script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script><?php endif; ?>
         <script src="<?php $this->options->themeUrl('js/main.js'); ?>"></script>
 		<?php if ($this->is('post')) : ?>
+		<link rel="stylesheet" href="<?php $this->options->themeUrl('css/zoom.css'); ?>">
 		<script src="<?php $this->options->themeUrl('js/zoom.js'); ?>"></script>
-		
 		<script src="<?php $this->options->themeUrl('lib/highlight.min.js'); ?>"></script>
 		<script>
 		$(function(){
@@ -38,7 +38,7 @@
         <script>
             if ('serviceWorker'in navigator) {
                 window.addEventListener('load', ()=>{
-                    navigator.serviceWorker.register('/sw.js').then(registration=>{
+                    navigator.serviceWorker.register('<?php $this->options->themeUrl('/sw.js'); ?>').then(registration=>{
                         console.log('SW registered: ', registration);
                     }
                     ).catch(registrationError=>{

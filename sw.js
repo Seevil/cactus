@@ -27,10 +27,6 @@ self.__precacheManifest = [
     "revision": "934bd2f4737c0e28cb90019ff24fda0c"
   },
   {
-    "url": "js/av-min.js",
-    "revision": "efe0dadd662922c8e1b2c9bb2a9fd03a"
-  },
-  {
     "url": "js/jquery.min.js",
     "revision": "6352d0f9a395680f603c340bdff0f248"
   },
@@ -66,14 +62,7 @@ self.__precacheManifest = [
     "url": "lib/jquery/jquery.min.js",
     "revision": "32015dd42e9582a80a84736f5d9a44d7"
   },
-  {
-    "url": "lib/justified-gallery/jquery.justifiedGallery.min.js",
-    "revision": "7b8f9e0d4b845e90381ae044b8b5e657"
-  },
-  {
-    "url": "lib/justified-gallery/justifiedGallery.min.css",
-    "revision": "9a5e8949e0c84f864668f0205c5fafbd"
-  },
+
   {
     "url": "lib/meslo-LG/fonts/MesloLGS-Regular.woff",
     "revision": "c26c11f108b98536a374afb1337e156c"
