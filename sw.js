@@ -24,11 +24,15 @@ workbox.clientsClaim();
 self.__precacheManifest = [
   {
     "url": "css/style.css",
-    "revision": "934bd2f4737c0e28cb90019ff24fda0c"
+    "revision": "4efaa3a84f463666c82e70aa2a96f5a2"
+  },
+  {
+    "url": "css/lightbox.min.css",
+    "revision": "767938d77eef356b1ba76c3897384948"
   },
   {
     "url": "js/jquery.min.js",
-    "revision": "6352d0f9a395680f603c340bdff0f248"
+    "revision": "4b57cf46dc8cb95c4cca54afc85e9540"
   },
   {
     "url": "js/lazyload.js",
@@ -37,6 +41,10 @@ self.__precacheManifest = [
   {
     "url": "js/main.js",
     "revision": "4ffdc40f2bf8f9f5fbbee8688c570ae1"
+  },
+  {
+    "url": "js/lightbox.min.js",
+    "revision": "754f3b83f87764db45e3adafea8c5720"
   },
   {
     "url": "lib/font-awesome/css/font-awesome.css",
@@ -57,10 +65,6 @@ self.__precacheManifest = [
   {
     "url": "lib/highlight.min.js",
     "revision": "4e0da54bb1cb0511de5f7bbf12298aa9"
-  },
-  {
-    "url": "lib/jquery/jquery.min.js",
-    "revision": "32015dd42e9582a80a84736f5d9a44d7"
   },
 
   {

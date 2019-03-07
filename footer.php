@@ -7,7 +7,7 @@
                 <nav>
                     <ul>
                         <li>
-                            <a href="/">Home</a>
+                            <a href="<?php $this->options->siteUrl();?>">Home</a>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
                         <?php if($this->options->github): ?><li>
@@ -17,19 +17,17 @@
                 </nav>
             </div>
         </footer>
-
+		<link rel="stylesheet" href="<?php $this->options->themeUrl('lib/font-awesome/css/font-awesome.min.css'); ?>">
         <?php if ($this->is('index')) : ?><script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script><?php endif; ?>
         <script src="<?php $this->options->themeUrl('js/main.js'); ?>"></script>
 		<?php if ($this->is('post')) : ?>
-		<link rel="stylesheet" href="<?php $this->options->themeUrl('css/zoom.css'); ?>">
-		<script src="<?php $this->options->themeUrl('js/zoom.js'); ?>"></script>
+		<link rel="stylesheet" href="<?php $this->options->themeUrl('css/lightbox.min.css'); ?>">
+		<script src="<?php $this->options->themeUrl('js/lightbox.min.js'); ?>"></script>
 		<script src="<?php $this->options->themeUrl('lib/highlight.min.js'); ?>"></script>
 		<script>
-		$(function(){
-		$("#post-content img").each(function(){
-		$(this).attr("data-action","zoom");
-		})
-		})
+		$('#post-content img').wrap(function () {
+		return '<a href="' + this.src + '" title="' + this.alt + '" data-lightbox="roadtrip"></a>';
+		});
 		</script>
         <script>
             hljs.initHighlightingOnLoad();
