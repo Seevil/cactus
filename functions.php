@@ -32,7 +32,7 @@ function themeInit($archive) {
 	if ($archive->is('single')) {  
     $archive->content = createCatalog($archive->content);//文章锚点实现
 }
-	$comment = spam_protection_pre($comment,$post, $result);//数字验证码
+	@$comment = spam_protection_pre($comment,$post, $result);//数字验证码
 }
 
 function parseContent($obj){
@@ -544,9 +544,9 @@ function spam_protection_math(){
     echo "<input type=\"hidden\" name=\"num2\" value=\"$num2\">";
 }
 function spam_protection_pre($comment, $post, $result){
-    $sum=$_POST['sum'];
+    @$sum=$_POST['sum'];
     switch($sum){
-        case $_POST['num1']+$_POST['num2']:
+        case @$_POST['num1']+$_POST['num2']:
         break;
         case null:
         throw new Typecho_Widget_Exception(_t('抱歉：请输入验证码','评论失败'));
