@@ -18,11 +18,10 @@ function themeConfig($form) {
     $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$urldiy = new Typecho_Widget_Helper_Form_Element_Text('urldiy', NULL, NULL, _t('主页自定义地址'), _t('注意该设置会直接输出设置内容，建议格式为\<a class="icon" href="https://twitter.com/skyurl" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a> 支持 FontAwesome 图标 ,留空则不显示'));
     $form->addInput($urldiy->addRule('xssCheck', _t('请不要在链接中使用特殊字符')));
-	
-	$Projects = new Typecho_Widget_Helper_Form_Element_Text('Projects', NULL, NULL, _t('首页 Projects 设置'), _t('注意该设置会直接输出设置内容,留空则不显示'));
-    $form->addInput($Projects->addRule('xssCheck', _t('请不要在链接中使用特殊字符')));
 
 
+	$Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>XDE|http://www.xde.io/|仙岛驿站</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>XDE|http://www.xde.io||</strong><br>多个链接换行即可，一行一个'));
+	$form->addInput($Projects);
 }
 
 function themeInit($archive) {
@@ -68,6 +67,28 @@ array_push($views, $cid);
         }
     }
     echo $row['views'];
+}
+/**项目展示
+<?php Projects(); ?>
+*/
+function Projects($sorts = NULL) {
+    $options = Typecho_Widget::widget('Widget_Options');
+    $Project = NULL;
+    if ($options->Projects) {
+        $list = explode("\r\n", $options->Projects);
+        foreach ($list as $val) {
+            list($name, $url, $description, $sort) = explode("|", $val);
+            if ($sorts) {
+                $arr = explode("|", $sorts);
+                if ($sort && in_array($sort, $arr)) {
+                    $Project .= $url ? '<li class="project-item"><a href="'.$url.'" target="_blank">'.$name.'</a>: '.$description.'</li>' : '<li class="project-item">'.$name.': '.$description.'</li>';
+                }
+            } else {
+                $Project .= $url ? '<li class="project-item"><a href="'.$url.'" target="_blank">'.$name.'</a>: '.$description.'</li>' : '<li class="project-item">'.$name.': '.$description.'</li>';
+            }
+        }
+    }
+    echo $Project ? $Project : '世间无限丹青手，一片伤心画不成。';
 }
 
 /**阅读浏览次数 

@@ -3,7 +3,7 @@
  * 仙人掌(Cactus)是优雅简洁的暗色主题
  * @package Cactus Theme
  * @author Intern
- * @version 1.0.0
+ * @version 1.0.1
  * @link https://wwww.xde.io/
  */
 
@@ -79,14 +79,7 @@ $this->need('header.php');
                         <a href="#" rel="external nofollow noopener noreferrer" target="_blank">Projects</a>
                     </span>
                     <ul class="project-list">
-					<?php if($this->options->Projects): ?>
-                        <li class="project-item">
-                            <a href="https://github.com/Seevil/fantasy" rel="external nofollow noopener noreferrer" target="_blank">Fantasy</a>
-                            : 一款极简Typecho 博客主题
-                        </li>
-						<?php else : ?>
-						世间无限丹青手，一片伤心画不成。
-					<?php endif; ?>
+					<?php Projects(); ?>
                     </ul>
                 </section>
             </section>
