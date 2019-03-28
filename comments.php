@@ -98,21 +98,19 @@ function threadedComments($comments, $options) {
 	</div>
 	<?php endif; ?>
 	</form>
+	<?php if($this->commentsNum!=0): ?>
 	<div class="vinfo" style="display:block;">
 		<div class="vcount col">
 			<span class="vnum"><?php $this->commentsNum('%d'); ?></span> 评论
 		</div>
 	</div>
+	<?php else: ?>
+	<div class="vempty" style="display:block;">快来做第一个评论的人吧~</div>
+	<?php endif; ?>
 	<?php if ($comments->have()): ?>
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
-		 <div class="pagination">
-					 <?php if($comments->_currentPage>1): ?>
-					 <?php if($comments->_currentPage>1): ?>
-					<a href="<?php $comments->pageLink('Previous'); ?>"><i class="fa fa-angle-left"></i></a><?php endif; ?>
-					<span class="page-number"><?php if($comments->_currentPage>0) echo 'Page '.$comments->_currentPage.' of '; ?><?php echo ceil($comments->getTotal() / $comments->parameter->pageSize); ?></span>
-					<a href="<?php $comments->pageLink('Next','next'); ?>"><i class="fa fa-angle-right"></i></a>
-					<?php endif; ?>
-				</div>
-</div>
+
+				<?php $comments->pageNav('<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>',10,'',array('wrapTag' => 'div', 'wrapClass' => 'pagination','itemTag' => '','currentClass' => 'page-number',)); ?>
+
 <?php endif; ?>

@@ -31,7 +31,7 @@ function themeInit($archive) {
 	if ($archive->is('single')) {  
     $archive->content = createCatalog($archive->content);//文章锚点实现
 }
-	@$comment = spam_protection_pre($comment,$post, $result);//数字验证码
+	$comment = spam_protection_pre($comment,$post, $result);//数字验证码
 }
 
 function parseContent($obj){
@@ -41,33 +41,7 @@ function parseContent($obj){
     }
     echo trim($obj->content);
 }
-function get_post_view($archive)
-{
-    $cid    = $archive->cid;
-    $db     = Typecho_Db::get();
-    $prefix = $db->getPrefix();
-    if (!array_key_exists('views', $db->fetchRow($db->select()->from('table.contents')))) {
-        $db->query('ALTER TABLE `' . $prefix . 'contents` ADD `views` INT(10) DEFAULT 0;');
-        echo 0;
-        return;
-    }
-    $row = $db->fetchRow($db->select('views')->from('table.contents')->where('cid = ?', $cid));
-    if ($archive->is('single')) {
- $views = Typecho_Cookie::get('extend_contents_views');
-        if(empty($views)){
-            $views = array();
-        }else{
-            $views = explode(',', $views);
-        }
-if(!in_array($cid,$views)){
-       $db->query($db->update('table.contents')->rows(array('views' => (int) $row['views'] + 1))->where('cid = ?', $cid));
-array_push($views, $cid);
-            $views = implode(',', $views);
-            Typecho_Cookie::set('extend_contents_views', $views); //记录查看cookie
-        }
-    }
-    echo $row['views'];
-}
+
 /**项目展示
 <?php Projects(); ?>
 */
@@ -144,15 +118,15 @@ function getBrowser($agent)
     } else if (preg_match('/FireFox\/([^\s]+)/i', $agent, $regs)) {
       $str1 = explode('Firefox/', $regs[0]);
 $FireFox_vern = explode('.', $str1[1]);
-        $outputer = '火狐浏览器 '. $FireFox_vern[0];
+        $outputer = 'Firefox Browser '. $FireFox_vern[0];
     } else if (preg_match('/Maxthon([\d]*)\/([^\s]+)/i', $agent, $regs)) {
       $str1 = explode('Maxthon/', $agent);
 $Maxthon_vern = explode('.', $str1[1]);
-        $outputer = '傲游浏览器 '.$Maxthon_vern[0];
+        $outputer = 'Maxthon Browser '.$Maxthon_vern[0];
     } else if (preg_match('#SE 2([a-zA-Z0-9.]+)#i', $agent, $regs)) {
-        $outputer = '搜狗浏览器';
+        $outputer = 'Sogo Browser';
     } else if (preg_match('#360([a-zA-Z0-9.]+)#i', $agent, $regs)) {
-$outputer = '360浏览器';
+$outputer = '360 Browser';
     } else if (preg_match('/Edge([\d]*)\/([^\s]+)/i', $agent, $regs)) {
         $str1 = explode('Edge/', $regs[0]);
 $Edge_vern = explode('.', $str1[1]);
@@ -163,63 +137,63 @@ $Edge_vern = explode('.', $str1[1]);
     } else if (preg_match('/UC/i', $agent)) {
               $str1 = explode('rowser/',  $agent);
 $UCBrowser_vern = explode('.', $str1[1]);
-        $outputer = 'UC浏览器 '.$UCBrowser_vern[0];
+        $outputer = 'UC Browser '.$UCBrowser_vern[0];
     }else if (preg_match('/OPR/i', $agent)) {
               $str1 = explode('OPR/',  $agent);
 $opr_vern = explode('.', $str1[1]);
-        $outputer = '欧朋浏览器 '.$opr_vern[0];
+        $outputer = 'Open Browser '.$opr_vern[0];
     } else if (preg_match('/MicroMesseng/i', $agent, $regs)) {
-        $outputer = '微信内嵌浏览器';
+        $outputer = 'Weixin Browser';
     }  else if (preg_match('/WeiBo/i', $agent, $regs)) {
-        $outputer = '微博内嵌浏览器';
-    }  else if (preg_match('/QQ/i', $agent, $regs)||preg_match('/QQBrowser\/([^\s]+)/i', $agent, $regs)) {
+        $outputer = 'WeiBo Browser';
+    }  else if (preg_match('/QQ/i', $agent, $regs)||preg_match('/QQ Browser\/([^\s]+)/i', $agent, $regs)) {
                   $str1 = explode('rowser/',  $agent);
 $QQ_vern = explode('.', $str1[1]);
-        $outputer = 'QQ浏览器 '.$QQ_vern[0];
+        $outputer = 'QQ Browser '.$QQ_vern[0];
     } else if (preg_match('/MQBHD/i', $agent, $regs)) {
                   $str1 = explode('MQBHD/',  $agent);
 $QQ_vern = explode('.', $str1[1]);
-        $outputer = 'QQ浏览器 '.$QQ_vern[0];
+        $outputer = 'QQ Browser '.$QQ_vern[0];
     } else if (preg_match('/BIDU/i', $agent, $regs)) {
-        $outputer = '百度浏览器';
+        $outputer = 'Baidu Browser';
     } else if (preg_match('/LBBROWSER/i', $agent, $regs)) {
-        $outputer = '猎豹浏览器';
+        $outputer = 'KS Browser';
     } else if (preg_match('/TheWorld/i', $agent, $regs)) {
-        $outputer = '世界之窗浏览器';
+        $outputer = 'TheWorld Browser';
     } else if (preg_match('/XiaoMi/i', $agent, $regs)) {
-        $outputer = '小米浏览器';
+        $outputer = 'XiaoMi Browser';
     } else if (preg_match('/UBrowser/i', $agent, $regs)) {
               $str1 = explode('rowser/',  $agent);
 $UCBrowser_vern = explode('.', $str1[1]);
-        $outputer = 'UC浏览器 '.$UCBrowser_vern[0];
+        $outputer = 'UCBrowser '.$UCBrowser_vern[0];
     } else if (preg_match('/mailapp/i', $agent, $regs)) {
-        $outputer = 'email内嵌浏览器';
+        $outputer = 'Email Browser';
     } else if (preg_match('/2345Explorer/i', $agent, $regs)) {
-        $outputer = '2345浏览器';
+        $outputer = '2345 Browser';
     } else if (preg_match('/Sleipnir/i', $agent, $regs)) {
-        $outputer = '神马浏览器';
+        $outputer = 'Sleipnir Browser';
     } else if (preg_match('/YaBrowser/i', $agent, $regs)) {
-        $outputer = 'Yandex浏览器';
+        $outputer = 'Yandex Browser';
     }  else if (preg_match('/Opera[\s|\/]([^\s]+)/i', $agent, $regs)) {
-        $outputer = 'Opera浏览器';
+        $outputer = 'Opera Browser';
     } else if (preg_match('/MZBrowser/i', $agent, $regs)) {
-        $outputer = '魅族浏览器';
+        $outputer = 'MZ Browser';
     } else if (preg_match('/VivoBrowser/i', $agent, $regs)) {
-        $outputer = 'vivo浏览器';
+        $outputer = 'Vivo Browser';
     } else if (preg_match('/Quark/i', $agent, $regs)) {
-        $outputer = '夸克浏览器';
+        $outputer = 'Quark Browser';
     } else if (preg_match('/mixia/i', $agent, $regs)) {
-        $outputer = '米侠浏览器';
+        $outputer = 'Mixia Browser';
     }else if (preg_match('/fusion/i', $agent, $regs)) {
-        $outputer = '客户端';
+        $outputer = 'Fusion';
     } else if (preg_match('/CoolMarket/i', $agent, $regs)) {
-        $outputer = '基安内置浏览器';
+        $outputer = 'CoolMarket Browser';
     } else if (preg_match('/Thunder/i', $agent, $regs)) {
-        $outputer = '迅雷内置浏览器';
+        $outputer = 'Thunder Browser';
     } else if (preg_match('/Chrome([\d]*)\/([^\s]+)/i', $agent, $regs)) {
 $str1 = explode('Chrome/', $agent);
 $chrome_vern = explode('.', $str1[1]);
-        $outputer = '<i class="fa fa-chrome"></i> Chrome '.$chrome_vern[0];
+        $outputer = 'Chrome '.$chrome_vern[0];
     } else if (preg_match('/safari\/([^\s]+)/i', $agent, $regs)) {
          $str1 = explode('Version/',  $agent);
 $safari_vern = explode('.', $str1[1]);
@@ -237,52 +211,52 @@ function getOs($agent)
  
     if (preg_match('/win/i', $agent)) {
         if (preg_match('/nt 6.0/i', $agent)) {
-            $os = '<i class="fa fa-windows"></i> Windows Vista';
+            $os = 'Windows Vista';
         } else if (preg_match('/nt 6.1/i', $agent)) {
-            $os = '<i class="fa fa-windows"></i> Windows 7';
+            $os = 'Windows 7';
         } else if (preg_match('/nt 6.2/i', $agent)) {
-            $os = '<i class="fa fa-windows"></i> Windows 8';
+            $os = 'Windows 8';
         } else if(preg_match('/nt 6.3/i', $agent)) {
-            $os = '<i class="fa fa-windows"></i> Windows 8.1';
+            $os = 'Windows 8.1';
         } else if(preg_match('/nt 5.1/i', $agent)) {
-            $os = '<i class="fa fa-windows"></i> Windows XP';
+            $os = 'Windows XP';
         } else if (preg_match('/nt 10.0/i', $agent)) {
-            $os = '<i class="fa fa-windows"></i> Windows 10';
+            $os = 'Windows 10';
         } else{
-            $os = '<i class="fa fa-windows"></i> Windows';
+            $os = 'Windows';
         }
     } else if (preg_match('/android/i', $agent)) {
 if (preg_match('/android 9/i', $agent)) {
-        $os = '<i class="fa fa-android"></i> Android P';
+        $os = 'Android P';
     }
 else if (preg_match('/android 8/i', $agent)) {
-        $os = '<i class="fa fa-android"></i> Android O';
+        $os = 'Android O';
     }
 else if (preg_match('/android 7/i', $agent)) {
-        $os = '<i class="fa fa-android"></i> Android N';
+        $os = 'Android N';
     }
 else if (preg_match('/android 6/i', $agent)) {
-        $os = '<i class="fa fa-android"></i> Android M';
+        $os = 'Android M';
     }
 else if (preg_match('/android 5/i', $agent)) {
-        $os = '<i class="fa fa-android"></i> Android L';
+        $os = 'Android L';
     }
 else{
-        $os = '<i class="fa fa-android"></i> Android';
+        $os = 'Android';
 }
     }
  else if (preg_match('/ubuntu/i', $agent)) {
-        $os = '<i class="fa fa-linux"></i> Linux';
+        $os = 'Linux';
     } else if (preg_match('/linux/i', $agent)) {
-        $os = '<i class="fa fa-linux"></i> Linux';
+        $os = 'Linux';
     } else if (preg_match('/iPhone/i', $agent)) {
-        $os = '<i class="fa fa-apple"></i> iPhone';
+        $os = 'iPhone';
     } else if (preg_match('/iPad/i', $agent)) {
-        $os = '<i class="fa fa-apple"></i> iPad';
+        $os = 'iPad';
     } else if (preg_match('/mac/i', $agent)) {
-        $os = '<i class="fa fa-OSX"></i> OSX';
+        $os = 'OSX';
     }else if (preg_match('/cros/i', $agent)) {
-        $os = 'chrome os';
+        $os = 'Chrome os';
     }else {
  return false;
     }
@@ -483,76 +457,6 @@ function commentAtContent($coid)
     }
 }
 
-/**
- * 输出评论回复/取消回复按钮
- * <?php commentReply($this); ?>
- */
-function commentReply($archive)
-{
-    echo "<script type=\"text/javascript\">
-    window.TypechoComment = {
-        dom : function (id) {
-            return document.getElementById(id);
-        },
-        create : function (tag, attr) {
-            var el = document.createElement(tag);
-            for (var key in attr) {
-                el.setAttribute(key, attr[key]);
-            }
-            return el;
-        },
-        reply : function (cid, coid) {
-            var comment = this.dom(cid), parent = comment.parentNode,
-                response = this.dom('$archive->respondId'), input = this.dom('comment-parent'),
-                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
-                textarea = response.getElementsByTagName('textarea')[0];
-            if (null == input) {
-                input = this.create('input', {
-                    'type' : 'hidden',
-                    'name' : 'parent',
-                    'id'   : 'comment-parent'
-                });
-                form.appendChild(input);
-            }
-            input.setAttribute('value', coid);
-            if (null == this.dom('comment-form-place-holder')) {
-                var holder = this.create('div', {
-                    'id' : 'comment-form-place-holder'
-                });
-                response.parentNode.insertBefore(holder, response);
-            }
-            comment.appendChild(response);
-            this.dom('cancel-comment-reply-link').style.display = '';
-            if (null != textarea && 'text' == textarea.name) {
-                textarea.focus();
-            }
-            var inputs=document.getElementsByClassName('comment-input');
-            return false;
-        },
-        cancelReply : function () {
-            var response = this.dom('$archive->respondId'),
-            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
-            if (null != input) {
-                input.parentNode.removeChild(input);
-            }
-            if (null == holder) {
-                return true;
-            }
-            this.dom('cancel-comment-reply-link').style.display = 'none';
-            holder.parentNode.insertBefore(response, holder);
-            var inputs=document.getElementsByClassName('comment-input');
-            //console.log(inputs);
-            for(var i=0;i<inputs.length;++i)
-            {
-                inputs[i].getElementsByTagName('label')[0].style.left='8px';
-                inputs[i].getElementsByTagName('label')[0].style.bottom='12px';
-            }
-            return false;
-        }
-    }
-</script>
-";
-}
 
 //算术验证评论
 
@@ -565,9 +469,10 @@ function spam_protection_math(){
     echo "<input type=\"hidden\" name=\"num2\" value=\"$num2\">";
 }
 function spam_protection_pre($comment, $post, $result){
-    @$sum=$_POST['sum'];
+    if(isset($_POST['sum'])){ 
+	$sum=$_POST['sum'];
     switch($sum){
-        case @$_POST['num1']+$_POST['num2']:
+        case $_POST['num1']+$_POST['num2']:
         break;
         case null:
         throw new Typecho_Widget_Exception(_t('抱歉：请输入验证码','评论失败'));
@@ -575,5 +480,6 @@ function spam_protection_pre($comment, $post, $result){
         default:
         throw new Typecho_Widget_Exception(_t('抱歉：验证码错误，请返回重试','评论失败'));
     }
+	};
     return $comment;
 }
