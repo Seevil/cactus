@@ -17,7 +17,7 @@ $this->need('header.php');
                 <span id="nav">
                     <ul>
                         <li>
-                            <a href="/">Home</a>
+                            <a href="<?php $this->options->siteUrl();?>">Home</a>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
                         <?php if($this->options->github): ?><li>

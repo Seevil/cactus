@@ -24,7 +24,7 @@ workbox.clientsClaim();
 self.__precacheManifest = [
   {
     "url": "css/style.css",
-    "revision": "4efaa3a84f463666c82e70aa2a96f5a2"
+    "revision": "c73c22702e5dc14bb4b7a57cce1af0e0"
   },
   {
     "url": "css/lightbox.min.css",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/lightbox.min.js",
-    "revision": "754f3b83f87764db45e3adafea8c5720"
+    "revision": "86ae6c62f555df51346b0be4bc2d0267"
   },
   {
     "url": "lib/font-awesome/css/font-awesome.css",

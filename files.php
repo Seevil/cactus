@@ -52,7 +52,7 @@ $this->widget('Widget_Contents_Post_Recent', 'pageSize=10000')->to($archives);
         if ($year != $year_tmp && $year > 0) $output .= '</ul>';   
         if ($year != $year_tmp) {   
             $year = $year_tmp;   
-            $output .= '<h3>'. $year .'</h3><ul class="post-list" id="post-list">'; //输出年份   
+            @$output .= '<h3>'. $year .'</h3><ul class="post-list" id="post-list">'; //输出年份   
         }    
         $output .= '<li class="post-item"><div class="meta"><time datetime="'.date('Y-m-d ',$archives->created).'" itemprop="datePublished">'.date('Y-m-d ',$archives->created).'</time></div><span><a href="'.$archives->permalink .'">'. $archives->title .'</a></span></li>'; //输出文章日期和标题   
     endwhile;   
