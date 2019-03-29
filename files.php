@@ -10,7 +10,7 @@ $this->need('header.php');
    <body>
         <div class="content index width mx-auto px3 my4">
             <header id="header">
-                <a href="/">
+                <a href="<?php $this->options->siteUrl();?>">
                     <div id="logo" style="background-image: url(<?php $this->options->themeUrl('images/logo.png'); ?>);"></div>
                     <div id="title">
                         <h1>Archives</h1>
@@ -24,7 +24,7 @@ $this->need('header.php');
                             </a>
                         </li>
                         <li>
-                            <a href="/">Home</a>
+                            <a href="<?php $this->options->siteUrl();?>">Home</a>
                         </li>
                         <?php $this->widget('Widget_Contents_Page_List')->parse('<li><a href="{permalink}">{title}</a></li>'); ?>
                         <?php if($this->options->github): ?>

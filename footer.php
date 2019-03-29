@@ -18,7 +18,10 @@
             </div>
         </footer>
 		<link rel="stylesheet" href="<?php $this->options->themeUrl('lib/font-awesome/css/font-awesome.min.css'); ?>">
-        <?php if ($this->is('index')) : ?><script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script><?php endif; ?>
+        <?php if ($this->is('index')) : ?>
+		<script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<?php endif; ?>
         <script src="<?php $this->options->themeUrl('js/main.js'); ?>"></script>
 		<?php if ($this->is('post')) : ?>
 		<link rel="stylesheet" href="<?php $this->options->themeUrl('css/lightbox.min.css'); ?>">
