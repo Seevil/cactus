@@ -5,8 +5,7 @@ function themeConfig($form) {
     $form->addInput($logoimg->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
     $favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('favicon地址'), _t('一般为http://www.yourblog.com/image.ico,支持 https:// 或 //,留空则不设置favicon'));
     $form->addInput($favicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
-    $favicons = new Typecho_Widget_Helper_Form_Element_Text('favicons', NULL, NULL, _t('favicon png格式地址 192x192'), _t('一般为http://www.yourblog.com/image.png, 支持 https:// 或 //,留空则不设置favicon'));
-    $form->addInput($favicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+
     $appleicon = new Typecho_Widget_Helper_Form_Element_Text('appleicon', NULL, NULL, _t('apple touch icon地址'), _t('一般为http://www.yourblog.com/image.png,支持 https:// 或 //,留空则不设置Apple Touch Icon'));
     $form->addInput($appleicon->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	
@@ -27,7 +26,7 @@ function themeConfig($form) {
         array('able' => _t('启用'),
             'disable' => _t('禁止'),
         ),
-        'disable', _t('文章目录设置'), _t('默认显示随机文章，启用则显示文字目录'));
+        'disable', _t('文章目录设置'), _t('默认显示随机文章，启用则显示文章目录'));
     $form->addInput($catalog);
 }
 

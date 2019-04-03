@@ -3,7 +3,7 @@
  * 仙人掌(Cactus)是优雅简洁的暗色主题
  * @package Cactus Theme
  * @author Intern
- * @version 1.0.3
+ * @version 1.1.0
  * @link https://wwww.xde.io/
  */
 

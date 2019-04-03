@@ -36,7 +36,6 @@
             'author'    =>  _t('%s 发布的文章')
         ), '', ' - '); ?><?php $this->options->title(); ?></title>
         <?php if($this->options->favicon): ?><link rel="shortcut icon" href="<?php $this->options->favicon();?>"><?php endif; ?>
-		<?php if($this->options->favicons): ?><link rel="icon" type="image/png" href="<?php $this->options->favicons();?>" sizes="192x192"><?php endif; ?>
         <?php if($this->options->appleicon): ?><link rel="apple-touch-icon" sizes="180x180" href="<?php $this->options->appleicon();?>"><?php endif; ?>
         <link rel="manifest" href="<?php $this->options->themeUrl('/manifest.json'); ?>">
         <link rel="stylesheet" href="<?php $this->options->themeUrl('css/style.css'); ?>">
