@@ -22,6 +22,13 @@ function themeConfig($form) {
 
 	$Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>XDE|http://www.xde.io/|仙岛驿站</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>XDE|http://www.xde.io||</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Projects);
+	
+	$catalog = new Typecho_Widget_Helper_Form_Element_Radio('catalog',
+        array('able' => _t('启用'),
+            'disable' => _t('禁止'),
+        ),
+        'disable', _t('文章目录设置'), _t('默认显示随机文章，启用则显示文字目录'));
+    $form->addInput($catalog);
 }
 
 function themeInit($archive) {
@@ -334,22 +341,22 @@ function getCatalog() {
     global $catalog;
     $index = '';
     if ($catalog) {
-        $index = '<ul>'."\n";
+        
         $prev_depth = '';
         $to_depth = 0;
         foreach($catalog as $catalog_item) {
             $catalog_depth = $catalog_item['depth'];
             if ($prev_depth) {
                 if ($catalog_depth == $prev_depth) {
-                    $index .= '</li>'."\n";
+                    $index .= '</li>';
                 } elseif ($catalog_depth > $prev_depth) {
                     $to_depth++;
-                    $index .= '<ul>'."\n";
+                   
                 } else {
                     $to_depth2 = ($to_depth > ($prev_depth - $catalog_depth)) ? ($prev_depth - $catalog_depth) : $to_depth;
                     if ($to_depth2) {
                         for ($i=0; $i<$to_depth2; $i++) {
-                            $index .= '</li>'."\n".'</ul>'."\n";
+                            $index .= '</li>';
                             $to_depth--;
                         }
                     }
@@ -360,9 +367,8 @@ function getCatalog() {
             $prev_depth = $catalog_item['depth'];
         }
         for ($i=0; $i<=$to_depth; $i++) {
-            $index .= '</li>'."\n".'</ul>'."\n";
+            $index .= '</li>';
         }
-    $index = '<div id="toc-container">'."\n".'<div id="toc">'."\n".'<strong>文章目录</strong>'."\n".$index.'</div>'."\n".'</div>'."\n";
     }
     echo $index;
 }

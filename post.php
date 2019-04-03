@@ -108,7 +108,7 @@ $this->need('header.php');
                 <div id="toc">
                     <nav id="TableOfContents">
                         <ul>
-							<?php theme_random_posts();?>
+							<?php if ($this->options->catalog == 'able'): ?><?php getCatalog(); ?><?php else: ?><?php theme_random_posts();?><?php endif; ?>
                         </ul>
                     </nav>
                 </div>
