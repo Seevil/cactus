@@ -18,7 +18,7 @@
             </div>
         </footer>
 		<link rel="stylesheet" href="<?php $this->options->themeUrl('lib/font-awesome/css/font-awesome.min.css'); ?>">
-        <?php if ($this->is('index')) : ?>
+        <?php if ($this->is('index','tag')):?>
 		<script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script>
 		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 		<?php endif; ?>
