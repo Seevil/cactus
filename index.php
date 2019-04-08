@@ -4,7 +4,7 @@
  * @package Cactus Theme
  * @author Intern
  * @version 1.1.0
- * @link https://wwww.xde.io/
+ * @link https://www.xde.io/
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
