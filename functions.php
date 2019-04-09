@@ -97,24 +97,31 @@ function Postviews($archive) {
     echo $exist == 0 ?  : $exist;
 }
 
-function theme_random_posts(){ 
+function theme_random_posts(){
 $defaults = array(
 'number' => 6,
-'xformat' => '<li> <a href="{permalink}">{title}</a></li>'
+'xformat' => '<li><a href="{permalink}">{title}</a></li>'
 );
 $db = Typecho_Db::get();
-$sql = $db->select()->from('table.contents')
+$adapterName = $db->getAdapterName();//兼容非MySQL数据库
+if($adapterName == 'pgsql' || $adapterName == 'Pdo_Pgsql' || $adapterName == 'Pdo_SQLite' || $adapterName == 'SQLite'){
+   $order_by = 'RANDOM()';
+   }else{
+   $order_by = 'RAND()';
+ }
+$sql = $db->select()->from('table.contents') 
 ->where('status = ?','publish')
 ->where('type = ?', 'post')
+->where('created <= unix_timestamp(now())', 'post') //添加这一句避免未达到时间的文章提前曝光
 ->limit($defaults['number'])
-->order('RAND()');
+->order($order_by);
 $result = $db->fetchAll($sql);
 foreach($result as $val){
 $val = Typecho_Widget::widget('Widget_Abstract_Contents')->filter($val);
 echo str_replace(array('{permalink}', '{title}'),array($val['permalink'], $val['title']), $defaults['xformat']);
 }
-
 }
+
 
 /** 获取浏览器信息 <?php echo getBrowser($comments->agent); ?> */
 function getBrowser($agent)
