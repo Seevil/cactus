@@ -3,8 +3,8 @@
  * 仙人掌(Cactus)是优雅简洁的暗色主题
  * @package Cactus Theme
  * @author Intern
- * @version 1.1.0
- * @link https://wwww.xde.io/
+ * @version 1.2.0
+ * @link https://www.xde.io/
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -13,6 +13,7 @@ $this->need('header.php');
     <body>
         <div class="content index width mx-auto px3 my4">
             <header id="header">
+			<?php $today = today(); ?>
                 <a href="<?php $this->options->siteUrl();?>">
                      <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
                     <div id="title">

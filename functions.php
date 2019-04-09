@@ -487,3 +487,20 @@ function spam_protection_pre($comment, $post, $result){
 	};
     return $comment;
 }
+
+/**
+* 获取扇贝单词每日一句
+*/
+function today(){
+    //删除之前的图片和故事
+    for ($i=1; $i <=30 ; $i++) { 
+        @unlink(date('Ymd',time()-24*3600*$i).'.json');
+    }
+    $coverstory = date('Ymd').'.json'; //每日故事 json格式
+    if (!file_exists($coverstory)) {
+        $json = file_get_contents('https://rest.shanbay.com/api/v2/quote/quotes/today/');
+        @file_put_contents($coverstory,$json); //写入文本
+    }
+    $coverstory = json_decode(file_get_contents($coverstory),true);
+    return $coverstory;
+}

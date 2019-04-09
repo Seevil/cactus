@@ -40,7 +40,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/main.js",
-    "revision": "4ffdc40f2bf8f9f5fbbee8688c570ae1"
+    "revision": "70b27067d04d0c6008ef57238ec6c9db"
   },
   {
     "url": "js/lightbox.min.js",

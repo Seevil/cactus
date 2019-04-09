@@ -22,6 +22,31 @@
         <?php if ($this->is('index')) : ?>
 		<script src="<?php $this->options->themeUrl('lib/typed.js'); ?>"></script>
 		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<script>	
+$(function () {
+  if(location.pathname !=='/') return;
+  $.get("<?php echo date('Ymd').'.json';?>", function (data) {
+    var data = data.data;
+    // var str =  data.content+'\n'
+    // + data.translation+"\n---- "
+    // +data.author +'\n'
+    var str =  data.content+'\n'
+    + data.translation+"\n---- "
+    
+    var options = {
+      strings: [ 
+        str + "Who??^1000",
+        str + "It's me^2000",
+        str +'Haha, make a joke',
+        str +data.author,
+      ],
+      typeSpeed: 20,
+      startDelay:300,
+      // loop: true,
+    }
+    var typed = new Typed(".description .typed", options);
+  })
+});</script>
 		<?php endif; ?>
 		<?php if ($this->is('post')) : ?>
 		<link rel="stylesheet" href="<?php $this->options->themeUrl('css/lightbox.min.css'); ?>">
