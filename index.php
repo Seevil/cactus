@@ -16,10 +16,10 @@ $this->need('header.php');
 			<?php $today = today(); ?>
                 <a href="<?php $this->options->siteUrl();?>">
                      <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
+					 </a>
                     <div id="title">
                         <h1><?php $this->options->title(); ?></h1>
                     </div>
-                </a>
                 <div id="nav">
                     <ul>
                         <li class="icon">

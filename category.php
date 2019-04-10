@@ -7,10 +7,10 @@ $this->need('header.php');
             <header id="header">
                 <a href="<?php $this->options->siteUrl();?>">
                     <div id="logo" style="background-image: url(<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>);"></div>
-                    <div id="title">
+                </a>
+				<div id="title">
                         <h1><?php $this->category() ?></h1>
                     </div>
-                </a>
                 <div id="nav">
                     <ul>
                         <li class="icon">
@@ -32,7 +32,7 @@ $this->need('header.php');
             <div id="theme-tagcloud" class="tagcloud-wrap">
 			<?php $this->widget('Widget_Metas_Tag_Cloud', 'ignoreZeroCount=1&limit=30')->to($tags); ?>
 			<?php while($tags->next()): ?>
-			<a style="font-size:<?php echo(rand(10, 24)); ?>px; text-transform:capitalize;")" href="<?php $tags->permalink(); ?>"><?php $tags->name(); ?></a>
+			<a style="font-size:<?php echo(rand(10, 24)); ?>px; text-transform:capitalize;" href="<?php $tags->permalink(); ?>"><?php $tags->name(); ?></a>
 			<?php endwhile; ?>
             </div>
             <section id="wrapper" class="home">

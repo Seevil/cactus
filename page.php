@@ -40,4 +40,5 @@ $this->need('header.php');
                  <?php $this->need('comments.php'); ?>
             </section>
         </div>
+		</div>
  <?php $this->need('footer.php'); ?>

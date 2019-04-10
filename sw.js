@@ -24,7 +24,7 @@ workbox.clientsClaim();
 self.__precacheManifest = [
   {
     "url": "css/style.css",
-    "revision": "c73c22702e5dc14bb4b7a57cce1af0e0"
+    "revision": "2535d0113496cc06bdc4ecb6ba4a01ec"
   },
   {
     "url": "css/lightbox.min.css",

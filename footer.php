@@ -1,4 +1,5 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<div class="mx-auto px3 my5">
  <footer id="footer" style="display:block;">
             <div class="footer-left">
                 Copyright © <?php echo date('Y'); ?> By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="http://www.xde.io" target="_blank">Xingr</a>
@@ -17,6 +18,7 @@
                 </nav>
             </div>
         </footer>
+		</div>
 		<link rel="stylesheet" href="<?php $this->options->themeUrl('lib/font-awesome/css/font-awesome.min.css'); ?>">
 		 <script src="<?php $this->options->themeUrl('js/main.js'); ?>"></script>
         <?php if ($this->is('index')) : ?>
@@ -62,18 +64,15 @@ $(function () {
         </script>
        <?php endif; ?>
         <script>
-            if ('serviceWorker'in navigator) {
-                window.addEventListener('load', ()=>{
-                    navigator.serviceWorker.register('<?php $this->options->themeUrl('/sw.js'); ?>').then(registration=>{
-                        console.log('SW registered: ', registration);
-                    }
-                    ).catch(registrationError=>{
-                        console.log('SW registration failed: ', registrationError);
-                    }
-                    );
-                }
-                );
-            }
+			if ('serviceWorker' in navigator) {
+			  window.addEventListener('load', function() {
+				navigator.serviceWorker.register('<?php $this->options->themeUrl('/sw.js'); ?>').then(function(registration) {
+				  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(err) {
+				  console.log('ServiceWorker registration failed: ', err);
+				});
+			  });
+			}
         </script>
 		<?php $this->footer(); ?>
     </body>

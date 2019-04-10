@@ -505,7 +505,7 @@ function today(){
     }
     $coverstory = date('Ymd').'.json'; //每日故事 json格式
     if (!file_exists($coverstory)) {
-        $json = file_get_contents('https://rest.shanbay.com/api/v2/quote/quotes/today/');
+        $json = file_get_contents("compress.zlib://".'https://rest.shanbay.com/api/v2/quote/quotes/today/');
         @file_put_contents($coverstory,$json); //写入文本
     }
     $coverstory = json_decode(file_get_contents($coverstory),true);

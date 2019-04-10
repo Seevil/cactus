@@ -37,7 +37,7 @@ $this->need('header.php');
             <div id="theme-tagcloud" class="tagcloud-wrap">
 			<?php $this->widget('Widget_Metas_Tag_Cloud', 'ignoreZeroCount=1&limit=30')->to($tags); ?>
 			<?php while($tags->next()): ?>
-			<a style="font-size:<?php echo(rand(10, 24)); ?>px; text-transform:capitalize;")" href="<?php $tags->permalink(); ?>"><?php $tags->name(); ?></a>
+			<a style="font-size:<?php echo(rand(10, 24)); ?>px; text-transform:capitalize;" href="<?php $tags->permalink(); ?>"><?php $tags->name(); ?></a>
 			<?php endwhile; ?>
             </div>
             <section id="wrapper" class="home">
@@ -56,7 +56,7 @@ $this->widget('Widget_Contents_Post_Recent', 'pageSize=10000')->to($archives);
         }    
         $output .= '<li class="post-item"><div class="meta"><time datetime="'.date('Y-m-d ',$archives->created).'" itemprop="datePublished">'.date('Y-m-d ',$archives->created).'</time></div><span><a href="'.$archives->permalink .'">'. $archives->title .'</a></span></li>'; //输出文章日期和标题   
     endwhile;   
-    $output .= '</ul></li></ul>';
+    $output .= '</ul>';
     echo $output;
 ?>
 
