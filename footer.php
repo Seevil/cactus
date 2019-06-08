@@ -26,8 +26,7 @@
 		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 		<script>	
 $(function () {
-  if(location.pathname !=='/') return;
-  $.get("<?php echo date('Ymd').'.json';?>", function (data) {
+  $.get("<?php $this->options->siteUrl();?><?php echo date('Ymd').'.json';?>", function (data) {
     var data = data.data;
     // var str =  data.content+'\n'
     // + data.translation+"\n---- "
