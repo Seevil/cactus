@@ -125,8 +125,8 @@ $this->need('header.php');
                             </div>
                             <div class="article-tag">
                                 <i class="fa fa-eye"></i>
-                                <span id="busuanzi_container_page_pv">
-                                    <span id="busuanzi_value_page_pv"><?php Postviews($this); ?></span>
+                                <span>
+                                    <span><?php Postviews($this); ?></span>
                                 </span>
                             </div>
                             <div class="article-tag">
