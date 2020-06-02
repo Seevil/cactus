@@ -112,7 +112,7 @@ if($adapterName == 'pgsql' || $adapterName == 'Pdo_Pgsql' || $adapterName == 'Pd
 $sql = $db->select()->from('table.contents') 
 ->where('status = ?','publish')
 ->where('type = ?', 'post')
-->where('created <= '. Helper::options()->gmtTime, 'post') //添加这一句避免未达到时间的文章提前曝光
+->where('created <= unix_timestamp(now())', 'post') //添加这一句避免未达到时间的文章提前曝光
 ->limit($defaults['number'])
 ->order($order_by);
 $result = $db->fetchAll($sql);
@@ -505,7 +505,12 @@ function today(){
     }
     $coverstory = date('Ymd').'.json'; //每日故事 json格式
     if (!file_exists($coverstory)) {
-        $json = file_get_contents("compress.zlib://".'https://rest.shanbay.com/api/v2/quote/quotes/today/');
+		$stream_opts = [
+		"ssl" => [
+		"verify_peer"=>false,
+		"verify_peer_name"=>false,
+		]];
+        $json = file_get_contents("compress.zlib://".'https://rest.shanbay.com/api/v2/quote/quotes/today/',false, stream_context_create($stream_opts));
         @file_put_contents($coverstory,$json); //写入文本
     }
     $coverstory = json_decode(file_get_contents($coverstory),true);
