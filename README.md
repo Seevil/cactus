@@ -9,6 +9,11 @@
 
 主题详情：https://www.xde.io/typecho/cactus.html
 
+版本：1.3.0
+咕咕咕了很久这次把能更新的全安排上了
+添加 搜索功能、表情功能、文章置顶、备案号设置 一些其他修复优化
+
+
 演示图片：
 首页：![image](https://user-images.githubusercontent.com/7334510/53931080-ae1baa00-40ce-11e9-8639-3d78f7692cd7.png)
 
