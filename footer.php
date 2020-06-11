@@ -2,7 +2,7 @@
 <div class="mx-auto px3 my5">
  <footer id="footer" style="display:block;">
             <div class="footer-left">
-                Copyright © <?php echo date('Y'); ?> By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="http://www.xde.io" target="_blank">Xingr</a>
+                Copyright © <?php echo date('Y'); ?> By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="http://www.xde.io" target="_blank">Xingr</a> <?php if($this->options->beian): ?><a href="http://www.beian.miit.gov.cn/"><?php $this->options->beian();?></a><?php endif; ?>
             </div>
             <div class="footer-right">
                 <nav>
@@ -62,6 +62,20 @@ $(function () {
             hljs.initHighlightingOnLoad();
         </script>
        <?php endif; ?>
+	 <link rel="stylesheet" href="<?php $this->options->themeUrl('css/search.css'); ?>">
+	   <div class="searchbox">
+    <div class="searchbox-container">
+        <div class="searchbox-input-wrapper">
+            <form class="search-form" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
+                <input name="s" type="search" class="searchbox-input" placeholder="输入关键字回车搜索" />
+                <span class="searchbox-close searchbox-selectable"><i class="fa fa-times-circle"></i></span>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){(function($){$('#search').click(function(){$('.searchbox').toggleClass('show')});$('.searchbox .searchbox-mask').click(function(){$('.searchbox').removeClass('show')});$('.searchbox-close').click(function(){$('.searchbox').removeClass('show')})})(jQuery)});
+</script>
         <script>
 			if ('serviceWorker' in navigator) {
 			  window.addEventListener('load', function() {

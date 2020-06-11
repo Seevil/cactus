@@ -24,7 +24,7 @@ workbox.clientsClaim();
 self.__precacheManifest = [
   {
     "url": "css/style.css",
-    "revision": "2535d0113496cc06bdc4ecb6ba4a01ec"
+    "revision": "ca33ab3c46f3e70f6d6339c73a9f51dd"
   },
   {
     "url": "css/lightbox.min.css",
@@ -33,6 +33,14 @@ self.__precacheManifest = [
   {
     "url": "js/jquery.min.js",
     "revision": "b354cc9d56a1da6b0c77604d1b153850"
+  },
+  {
+    "url": "css/search.css",
+    "revision": "20c9156a78a04b2857d9310ab1582f7e"
+  },
+   {
+    "url": "css/comments.css",
+    "revision": "ac52ba3ceaa29d337d9aa44538e7f4f7"
   },
   {
     "url": "js/lazyload.js",
@@ -65,6 +73,14 @@ self.__precacheManifest = [
   {
     "url": "lib/highlight.min.js",
     "revision": "4e0da54bb1cb0511de5f7bbf12298aa9"
+  },
+    {
+    "url": "lib/OwO/OwO.min.js",
+    "revision": "b14ecca1a89c41307ebbc5a2ff70cb50"
+  },
+    {
+    "url": "lib/OwO/OwO.min.css",
+    "revision": "fa21a60e7f352aadb07cdf75d04e2c4e"
   },
 
   {

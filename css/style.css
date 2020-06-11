@@ -344,3 +344,4 @@ pre code{border:none;display:block;padding:0}
 .protected .submit:active,.submit:hover{color:#3090e4;border-color:#3090e4;background-color:#fff}
 .protected .text{border:none;resize:none;outline:0;padding:7px 6px;max-width:100%;font-size:.775rem}
 .protected input{background:#ededed;border-radius:4px}
+.sticky {color:#2bbc8a;}

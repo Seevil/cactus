@@ -83,28 +83,6 @@ $(document).ready(function () {
   }
 });
 
-
-
-// var _mtac = {};
-//   	(function() {
-//       if(location.host!=='alili.tech')return;
-//   		var mta = document.createElement("script");
-//   		mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
-//   		mta.setAttribute("name", "MTAH5");
-//   		mta.setAttribute("sid", "500643908");
-//   		mta.setAttribute("cid", "500649335");
-//   		var s = document.getElementsByTagName("script")[0];
-//   		s.parentNode.insertBefore(mta, s);
-//   	})();
-
-// Notification.requestPermission().then(function(permission) {
-//   if(permission === 'granted'){
-//       console.log('用户允许通知');
-//   }else if(permission === 'denied'){
-//       console.log('用户拒绝通知');
-//   }
-// });
-
 //  toc 里面是a标签问题
 $(function(){
   if($("#toc li a")){

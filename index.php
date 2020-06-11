@@ -3,12 +3,40 @@
  * 仙人掌(Cactus)是优雅简洁的暗色主题
  * @package Cactus Theme
  * @author Intern
- * @version 1.2.0
+ * @version 1.3.0
  * @link https://www.xde.io/
  */
-
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('header.php');
+$sticky = $this->options->sticky; 
+if($sticky && $this->is('index') || $this->is('front')){
+    $sticky_cids = explode(',', strtr($sticky, ' ', ','));
+    $sticky_html = "<span class='sticky'>[置顶] </span>";
+    $db = Typecho_Db::get();
+    $pageSize = $this->options->pageSize;
+    $select1 = $this->select()->where('type = ?', 'post');
+    $select2 = $this->select()->where('type = ? && status = ? && created < ?', 'post','publish',time());
+    $this->row = [];
+    $this->stack = [];
+    $this->length = 0;
+    $order = '';
+    foreach($sticky_cids as $i => $cid) {
+        if($i == 0) $select1->where('cid = ?', $cid);
+        else $select1->orWhere('cid = ?', $cid);
+        $order .= " when $cid then $i";
+        $select2->where('table.contents.cid != ?', $cid);
+    }
+    if ($order) $select1->order(null,"(case cid$order end)");
+    if ($this->_currentPage == 1) foreach($db->fetchAll($select1) as $sticky_post){ 
+        $sticky_post['sticky'] = $sticky_html;
+        $this->push($sticky_post);
+    }
+$uid = $this->user->uid; 
+    if($uid) $select2->orWhere('authorId = ? && status = ?',$uid,'private');
+    $sticky_posts = $db->fetchAll($select2->order('table.contents.created', Typecho_Db::SORT_DESC)->page($this->_currentPage, $this->parameter->pageSize));
+    foreach($sticky_posts as $sticky_post) $this->push($sticky_post); 
+    $this->setTotal($this->getTotal()-count($sticky_cids)); 
+}
 ?>
     <body>
         <div class="content index width mx-auto px3 my4">
@@ -35,6 +63,7 @@ $this->need('header.php');
 						<li>
                          <a href="<?php $this->options->github();?>" target="_blank">Github</a>
                         </li><?php endif; ?>
+						
                     </ul>
                 </div>
             </header>
@@ -55,7 +84,7 @@ $this->need('header.php');
                     <ul id="sociallinks">
 						<li><?php if($this->options->github): ?><a class="icon" href="<?php $this->options->github();?>" target="_blank" title="github"><i class="fa fa-github"></i></a><?php endif; ?><?php if($this->options->twitter): ?> <a class="icon" href="<?php $this->options->twitter();?>" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a><?php endif; ?><?php if($this->options->weibo): ?> <a class="icon" href="<?php $this->options->weibo();?>" target="_blank" title="weibo"><i class="fa fa-weibo"></i></a><?php endif; ?><?php if($this->options->urldiy): ?> <?php $this->options->urldiy();?><?php endif; ?><?php if($this->options->email): ?> <a class="icon" href="mailto:<?php $this->options->email();?>" target="_blank" title="email"><i class="fa fa-envelope"></i></a><?php endif; ?>
                         </li>
-                    </ul>.<p></p>
+                    </ul>. <a id="search" class="search icon" href="javascript:;"><i class="fa fa-search"></i></a><p></p>
                     <p class="prompt ad-text output new-output">p.s. 网站已经支持PWA,可尝试添加到桌面</p>
                 </section>
                 <section id="writing">
@@ -69,7 +98,7 @@ $this->need('header.php');
                                 <time datetime="<?php $this->date(); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
                             </div>
                             <span>
-                                <a href="<?php $this->permalink() ?>"><?php $this->title(38,'...') ?></a>
+                                <a href="<?php $this->permalink() ?>"><?php $this->sticky(38,'...'); $this->title(38,'...') ?></a>
                             </span>
                         </li>
 					 <?php endwhile; ?>

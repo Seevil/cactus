@@ -1,5 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <link rel="stylesheet" href="<?php $this->options->themeUrl('css/comments.css'); ?>">
+<link rel="stylesheet" href="<?php $this->options->themeUrl('lib/OwO/OwO.min.css'); ?>">
 <?php 
 function threadedComments($comments, $options) {
     $commentClass = '';
@@ -58,7 +59,8 @@ function threadedComments($comments, $options) {
 		<div class="vheader item3">
 		</div>
 		<div class="vedit">
-			<textarea  name="text" id="veditor" class="veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="说点什么?"><?php $this->remember('text',false); ?></textarea>
+			<textarea  name="text" id="veditor" class="OwO-textarea veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="说点什么?"><?php $this->remember('text',false); ?></textarea>
+			<div class="vrow"><div class="vcol vcol-60 status-bar"></div><div class="vcol vcol-40 vctrl text-right"><div title="表情" class="OwO"></div></div></div>
 		</div>
 		<div class="vcontrol">
 			<div class="col col-20" title="Markdown is supported">
@@ -75,11 +77,12 @@ function threadedComments($comments, $options) {
 		<?php else: ?>
 		<div class="vwrap">
 		<div class="vheader item3">
-			<input name="author" placeholder="昵称" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(http://)" class="vlink vinput" type="text" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>>
+			<input name="author" placeholder="昵称" class="vnick vinput" type="text" value="<?php $this->remember('author'); ?>" required><input name="mail" placeholder="邮箱" class="vmail vinput" type="email" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?>><input name="url" placeholder="网址(http://)" class="vlink vinput" type="url" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>
 		</div>
 		
 		<div class="vedit">
-			<textarea  name="text" id="veditor" class="veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="说点什么?"><?php $this->remember('text'); ?></textarea>
+			<textarea  name="text" id="veditor" class="OwO-textarea veditor vinput" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('misubmit').click();return false};" placeholder="说点什么?"><?php $this->remember('text'); ?></textarea>
+			<div class="vrow"><div class="vcol vcol-60 status-bar"></div><div class="vcol vcol-40 vctrl text-right"><div title="表情" class="OwO"></div></div></div>
 		</div>
 		<div class="vcontrol">
 			<div class="col col-20" title="Markdown is supported">
@@ -111,6 +114,17 @@ function threadedComments($comments, $options) {
 	<?php $comments->listComments(); ?>
 	<?php endif; ?>
 
-				<?php $comments->pageNav('<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>',10,'',array('wrapTag' => 'div', 'wrapClass' => 'pagination','itemTag' => '','currentClass' => 'page-number',)); ?>
-
+	<?php $comments->pageNav('<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>',10,'',array('wrapTag' => 'div', 'wrapClass' => 'pagination','itemTag' => '','currentClass' => 'page-number',)); ?>
+	<script src="<?php $this->options->themeUrl('lib/OwO/OwO.min.js'); ?>"></script>
+	<script type="text/javascript">
+//OwO
+var OwO_winds = new OwO({
+    logo: '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>',
+    container: document.getElementsByClassName('OwO')[0],
+    target: document.getElementsByClassName('OwO-textarea')[0],
+    api: '<?php if ($this->options->Emoji == 'able'): ?><?php $this->options->themeUrl('lib/OwO/OwO.json'); ?><?php else: ?><?php $this->options->themeUrl('lib/OwO/OwOmini.json'); ?><?php endif; ?>',
+    position: 'down',
+    width: '100%',
+    maxHeight: '250px'
+});</script>
 <?php endif; ?>

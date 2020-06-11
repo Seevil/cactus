@@ -28,6 +28,10 @@ $this->need('header.php');
                 <br>
                 <span id="actions">
                     <ul>
+					<li>
+					<a id="search" class="search icon"href="javascript:;" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');">
+					<i class="fa fa-search" aria-hidden="true" onmouseover='$("#i-search").toggle();' onmouseout='$("#i-search").toggle();'></i></a>
+					</li>
                         <li>
                             <?php $this->theNext('%s', '', array('title' => '<i class="fa fa-chevron-left" aria-hidden="true" onmouseover=\'$("#i-prev").toggle();\' onmouseout=\'$("#i-prev").toggle();\'></i>', 'tagClass' => 'icon')); ?>
                         </li>
@@ -45,6 +49,7 @@ $this->need('header.php');
                             </a>
                         </li>
                     </ul>
+					 <span id="i-search" class="info" style="display:none;">Search</span>
                     <span id="i-prev" class="info" style="display:none;">Previous post</span>
                     <span id="i-next" class="info" style="display:none;">Next post</span>
                     <span id="i-top" class="info" style="display:none;">Back to top</span>
@@ -118,7 +123,7 @@ $this->need('header.php');
             <section id="wrapper" class="home">
                 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
                     <header>
-                        <h1 class="posttitle" itemprop="name headline"><?php $this->title() ?></h1>
+                        <h1 class="posttitle" itemprop="name headline"><a href="<?php $this->options->siteUrl();?>"><?php $this->title() ?></a></h1>
                         <div class="meta">
                             <div class="postdate">
                                 <time datetime="<?php $this->date(); ?>" itemprop="datePublished"><?php $this->date(); ?></time>
@@ -137,7 +142,7 @@ $this->need('header.php');
                         </div>
                     </header>
                     <div class="content" itemprop="articleBody" id="post-content">
-                        <?php $this->content(); ?>
+                        <?php parseContent($this); ?>
                         <h2>本文链接：</h2>
                         <a href="<?php $this->permalink() ?>" target="_blank"><?php $this->permalink() ?></a>
                     </div>
