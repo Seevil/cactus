@@ -120,7 +120,7 @@ body{color:#c9cacc;background-color:#1d1f21;font-size:14px;font-weight:400;text-
 #header #nav ul li:last-child,#header #nav ul li:last-child a,#header-post #nav ul li:last-child a,#header-post ul li:last-child{margin-right:0}
 .width{width:100%;max-width:39rem}
 @media (max-width:480px){pre .line{-webkit-text-size-adjust:none}
-.px3{padding-left:1.4rem;padding-right:1.4rem}
+.px3{padding-left:1.1rem;padding-right:1.1rem}
 .my4{margin-top:2rem;margin-bottom:2rem}
 }
 #header{max-width:710px;width:100%;margin:0 auto 3rem}

@@ -24,7 +24,7 @@ workbox.clientsClaim();
 self.__precacheManifest = [
   {
     "url": "css/style.css",
-    "revision": "ca33ab3c46f3e70f6d6339c73a9f51dd"
+    "revision": "d26f91407da055373357a7a9bd29e2bb"
   },
   {
     "url": "css/lightbox.min.css",
@@ -36,7 +36,7 @@ self.__precacheManifest = [
   },
   {
     "url": "css/search.css",
-    "revision": "20c9156a78a04b2857d9310ab1582f7e"
+    "revision": "c1f2a50d1f6903ebeac7432fa1d70f5a"
   },
    {
     "url": "css/comments.css",

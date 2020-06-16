@@ -9,5 +9,5 @@
 .searchbox .searchbox-input-wrapper .searchbox-close:hover{color:#3273dc}
 .searchbox .searchbox-result-wrapper{left:0;right:0;top:45px;bottom:0;overflow-y:auto;position:absolute}
 .searchbox .searchbox-container{left:50%;top:255px;width:540px;z-index:101;bottom:100px;margin-left:-270px;box-sizing:border-box}
-@media screen and (max-width:559px),screen and (max-height:479px){.searchbox .searchbox-container{top:0;left:0;margin:0;width:100%;height:100%;background:#f7f7f7}
+@media screen and (max-width:559px),screen and (max-height:479px){.searchbox .searchbox-container{/* top:0; */left:0;margin:0;width:100%;height:100%;background: #0d382959;}
 }
