@@ -11,7 +11,7 @@
 		<meta http-equiv="Cache-Control" content="no-transform"/>
 		<meta http-equiv="Cache-Control" content="no-siteapp"/>
         <meta name="description" itemprop="description" content="<?php $this->options->description() ?>">
-        <meta name="keywords" content="<?php $this->options->keywords() ?>">
+        
 		<meta property="og:type" content="blog"/>
         <meta property="og:locale" content="zh_CN">
         <meta property="og:image" content="<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>">
@@ -29,7 +29,7 @@
 		<meta property="og:description" content="<?php $this->description();?>"/>
 		<meta property="og:release_date" content="<?php $this->date(); ?>"/>
 		<?php endif;?>
-        <?php $this->header('keywords=&generator=&template=&pingback=&xmlrpc=&wlw=&commentReply=&rss1=&rss2=&atom='); ?>
+        <?php $this->header('generator=&template=&pingback=&xmlrpc=&wlw=&commentReply='); ?>
 		<title><?php $this->archiveTitle(array(
             'category'  =>  _t('分类 %s 下的文章'),
             'search'    =>  _t('包含关键字 %s 的文章'),

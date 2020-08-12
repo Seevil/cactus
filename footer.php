@@ -49,7 +49,7 @@ $(function () {
   })
 });</script>
 		<?php endif; ?>
-		<?php if ($this->is('post')) : ?>
+		<?php if ($this->is('post') || $this->is('page'))  : ?>
 		<link rel="stylesheet" href="<?php $this->options->themeUrl('css/lightbox.min.css'); ?>">
 		<script src="<?php $this->options->themeUrl('js/lightbox.min.js'); ?>"></script>
 		<script src="<?php $this->options->themeUrl('lib/highlight.min.js'); ?>"></script>

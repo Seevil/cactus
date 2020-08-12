@@ -16,13 +16,19 @@ function themeConfig($form) {
     $form->addInput($twitter->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$weibo = new Typecho_Widget_Helper_Form_Element_Text('weibo', NULL, NULL, _t('Weibo地址'), _t('一般为http://www.weibo.com/xxx ,留空则不设置Weibo地址'));
     $form->addInput($weibo->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	$writing = new Typecho_Widget_Helper_Form_Element_Text('writing', NULL, NULL, _t('首页writing地址'), _t('一般设置为你的归档地址 ,留空则默认为/archives.html'));
+    $form->addInput($writing->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	
+	$Projectsurl = new Typecho_Widget_Helper_Form_Element_Text('Projectsurl', NULL, NULL, _t('首页Projects地址'), _t('一般为http://www.url.com/ ,留空则默认为#地址'));
+    $form->addInput($Projectsurl->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
+	
 	$urldiy = new Typecho_Widget_Helper_Form_Element_Text('urldiy', NULL, NULL, _t('主页自定义地址'), _t('注意该设置会直接输出设置内容，建议格式为《a class="icon" href="https://twitter.com/skyurl" target="_blank" title="twitter"》《i class="fa fa-twitter"》《/i》《/a》 支持 FontAwesome 图标 ,留空则不显示'));
     $form->addInput($urldiy->addRule('xssCheck', _t('请不要在链接中使用特殊字符')));
 	$beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('备案号设置'), _t('直接填写备案号即可如：京ICP备888888号'));
     $form->addInput($beian->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$sticky = new Typecho_Widget_Helper_Form_Element_Text('sticky', NULL,NULL, _t('文章置顶'), _t('置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔'));
     $form->addInput($sticky);
-	$Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>XDE|http://www.xde.io/|仙岛驿站</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>XDE|http://www.xde.io||</strong><br>多个链接换行即可，一行一个'));
+	$Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 作品链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>XDE|http://www.xde.io/|仙岛驿站</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>XDE|http://www.xde.io||</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Projects);
 	
 	$catalog = new Typecho_Widget_Helper_Form_Element_Radio('catalog',

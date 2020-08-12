@@ -3,7 +3,7 @@
  * 仙人掌(Cactus)是优雅简洁的暗色主题
  * @package Cactus Theme
  * @author Intern
- * @version 1.3.1
+ * @version 1.3.2
  * @link https://www.xde.io/
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -89,7 +89,7 @@ $uid = $this->user->uid;
                 </section>
                 <section id="writing">
                     <span class="h1">
-                        <a href="archives.html">Writing</a>
+                        <a href="<?php if($this->options->writing): ?><?php $this->options->writing();?><?php else : ?>archives.html<?php endif; ?>">Writing</a>
                     </span>
                     <ul class="post-list" id="post-list">
 					<?php while($this->next()): ?>
@@ -106,7 +106,7 @@ $uid = $this->user->uid;
                 </section>
                 <section id="projects">
                     <span class="h1">
-                        <a href="#" rel="external nofollow noopener noreferrer" target="_blank">Projects</a>
+                        <a href="<?php if($this->options->Projects): ?><?php $this->options->Projects();?><?php else : ?>#<?php endif; ?>" rel="external nofollow noopener noreferrer" target="_blank">Projects</a>
                     </span>
                     <ul class="project-list">
 					<?php Projects(); ?>

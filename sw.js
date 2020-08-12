@@ -40,7 +40,7 @@ self.__precacheManifest = [
   },
    {
     "url": "css/comments.css",
-    "revision": "ac52ba3ceaa29d337d9aa44538e7f4f7"
+    "revision": "1999d64221003e829e10e1a21e36b399"
   },
   {
     "url": "js/lazyload.js",
@@ -72,7 +72,7 @@ self.__precacheManifest = [
   },
   {
     "url": "lib/highlight.min.js",
-    "revision": "4e0da54bb1cb0511de5f7bbf12298aa9"
+    "revision": "885244632b9e623c0cc40061ee5745f4"
   },
     {
     "url": "lib/OwO/OwO.min.js",
