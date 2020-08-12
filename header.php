@@ -10,19 +10,19 @@
         <meta name="wap-font-scale" content="no">
 		<meta http-equiv="Cache-Control" content="no-transform"/>
 		<meta http-equiv="Cache-Control" content="no-siteapp"/>
-        <meta name="description" itemprop="description" content="<?php $this->options->description() ?>">
-        
 		<meta property="og:type" content="blog"/>
         <meta property="og:locale" content="zh_CN">
         <meta property="og:image" content="<?php if($this->options->logoimg): ?><?php $this->options->logoimg();?><?php else : ?><?php $this->options->themeUrl('images/logo.png'); ?><?php endif; ?>">
         <meta property="og:site_name" content="<?php $this->options->title(); ?>">
 		 <?php if ($this->is('index')): ?>
+		 <meta name="description" itemprop="description" content="<?php $this->options->description() ?>">
 		<meta property="og:url" content="<?php $this->options->siteUrl();?>"/>
 		<meta property="og:title" content="<?php $this->options->title();?>"/>
 		<meta property="og:author" content="<?php $this->author->name();?>"/>
 		<meta property="og:description" content="<?php $this->options->description();?>"/>
 		<?php endif;?>
 		<?php if ($this->is('post') || $this->is('page')): ?>
+		<meta name="description" itemprop="description" content="<?php $this->description();?>">
 		<meta property="og:url" content="<?php $this->permalink();?>"/>
 		<meta property="og:title" content="<?php $this->title();?> - <?php $this->options->title();?>"/>
 		<meta property="og:author" content="<?php $this->author();?>"/>
