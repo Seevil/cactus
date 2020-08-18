@@ -106,7 +106,7 @@ $uid = $this->user->uid;
                 </section>
                 <section id="projects">
                     <span class="h1">
-                        <a href="<?php if($this->options->Projects): ?><?php $this->options->Projects();?><?php else : ?>#<?php endif; ?>" rel="external nofollow noopener noreferrer" target="_blank">Projects</a>
+                        <a href="<?php if($this->options->Projectsurl): ?><?php $this->options->Projectsurl();?><?php else : ?>#<?php endif; ?>" rel="external nofollow noopener noreferrer" target="_blank">Projects</a>
                     </span>
                     <ul class="project-list">
 					<?php Projects(); ?>
