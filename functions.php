@@ -120,19 +120,15 @@ $defaults = array(
 );
 $db = Typecho_Db::get();
 $adapterName = $db->getAdapterName();//兼容非MySQL数据库
-$timestamp_now = 'unix_timestamp(now())';
 if($adapterName == 'pgsql' || $adapterName == 'Pdo_Pgsql' || $adapterName == 'Pdo_SQLite' || $adapterName == 'SQLite'){
    $order_by = 'RANDOM()';
    }else{
    $order_by = 'RAND()';
  }
- if($adapterName == 'SQLite') {
-    $timestamp_now = 'strftime("%s","now")';
- }
 $sql = $db->select()->from('table.contents') 
 ->where('status = ?','publish')
 ->where('type = ?', 'post')
-->where('created <= ?', $timestamp_now, 'post') //添加这一句避免未达到时间的文章提前曝光
+->where('created <= unix_timestamp(now())', 'post') //添加这一句避免未达到时间的文章提前曝光
 ->limit($defaults['number'])
 ->order($order_by);
 $result = $db->fetchAll($sql);
