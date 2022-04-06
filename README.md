@@ -3,11 +3,17 @@
 
 >世间无限丹青手，一片伤心画不成。
 
-演示地址：https://www.xde.io/
+~~演示地址：https://www.xde.io/
 
 主题移植至Hexo 同名主题 [hexo-theme-cactus][1]参考(抄)了部分 [Alili][2]的样式和功能。
 
-主题详情：https://www.xde.io/typecho/cactus.html
+主题详情：https://www.krsay.com/typecho/cactus.html
+
+版本：1.3.3
+
+修复扇贝API ，顺便改用te自带函数获取每日数据
+兼容 typecho 1.2.0
+其他资源更新、文章页微调
 
 版本：1.3.0
 
