@@ -221,7 +221,7 @@ article header .meta *{color:#ccc;font-size:.85rem}
 article header .author{text-transform:uppercase;letter-spacing:.01em;font-weight:700}
 article header .postdate{display:inline}
 article .content h2:before{content:"#";color:#2bbc8a;position:absolute;left:-1rem;top:-4px;font-size:1.2rem;font-weight:700}
-article .content img,article .content video{max-width:100%;height:auto;display:block;margin:auto}
+article .content img,article .content video{max-width:100%;height:auto;display:block;margin:auto;border-radius: 4px;}
 article .content .video-container{position:relative;padding-top:56.25%;height:0;overflow:hidden}
 .highlight,.hljs,pre{overflow-x:auto}
 article .content .video-container embed,article .content .video-container iframe,article .content .video-container object{position:absolute;top:0;left:0;width:100%;height:100%;margin-top:0}

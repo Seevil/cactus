@@ -11,7 +11,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/6.1.5/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -24,7 +24,7 @@ workbox.clientsClaim();
 self.__precacheManifest = [
   {
     "url": "css/style.css",
-    "revision": "f20816567da09c912cdd22c4a9fc245a"
+    "revision": "07168654d3e0648f93f59a9bc537457a"
   },
   {
     "url": "css/lightbox.min.css",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/lazyload.js",
-    "revision": "5a0a087606ad5b73ad985db19a150220"
+    "revision": "377c7f9061416449faef372ff1fba9ed"
   },
   {
     "url": "js/main.js",
@@ -72,7 +72,7 @@ self.__precacheManifest = [
   },
   {
     "url": "lib/highlight.min.js",
-    "revision": "885244632b9e623c0cc40061ee5745f4"
+    "revision": "bdbf53ccebb5d5daac05c2b6db7a69dc"
   },
     {
     "url": "lib/OwO/OwO.min.js",
@@ -93,7 +93,7 @@ self.__precacheManifest = [
   },
   {
     "url": "lib/typed.js",
-    "revision": "5d53ae31eda336c919b79ad3590e8589"
+    "revision": "c4d749bea1bf41b435328c6171c37c6d"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
@@ -101,5 +101,10 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerRoute(/.*\.js/, workbox.strategies.networkFirst(), 'GET');
 workbox.routing.registerRoute(/.*\.css/, workbox.strategies.staleWhileRevalidate({ plugins: [{ cacheableResponse: { statuses: [ 0, 200 ] } }] }), 'GET');
-workbox.routing.registerRoute(/.*\.(?:png|jpg|jpeg|svg|gif)/, workbox.strategies.cacheFirst({ plugins: [{ expiration: { maxEntries: 50 } }] }), 'GET');
+workbox.routing.registerRoute(/.*\.(?:png|jpg|jpeg|svg|gif|webp)/, workbox.strategies.cacheFirst({ plugins: [{ expiration: { maxEntries: 50 } }] }), 'GET');
 workbox.routing.registerRoute(/.*\.html/, workbox.strategies.networkFirst(), 'GET');
+onmessage = (event) => {
+  importScripts('lib/highlight.min.js');
+  const result = self.hljs.highlightAuto(event.data);
+  postMessage(result.value);
+};

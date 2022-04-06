@@ -28,7 +28,7 @@ function themeConfig($form) {
     $form->addInput($beian->addRule('xssCheck', _t('请不要在图片链接中使用特殊字符')));
 	$sticky = new Typecho_Widget_Helper_Form_Element_Text('sticky', NULL,NULL, _t('文章置顶'), _t('置顶的文章cid，按照排序输入, 请以半角逗号或空格分隔'));
     $form->addInput($sticky);
-	$Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 作品链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>XDE|http://www.xde.io/|仙岛驿站</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>XDE|http://www.xde.io||</strong><br>多个链接换行即可，一行一个'));
+	$Projects = new Typecho_Widget_Helper_Form_Element_Textarea('Projects', NULL, NULL, _t('首页 Projects 作品链接 设置（注意：切换主题会被清空，注意备份！）'), _t('按照格式输入链接信息，格式：<br><strong>链接名称（必须）|链接地址（必须）|链接描述</strong><br>不同信息之间用英文竖线“|”分隔，例如：<br><strong>XDE|https://www.krsay.com/|可说欢喜</strong><br>若中间有暂时不想填的信息，请留空，例如暂时不想填写链接描述：<br><strong>XDE|https://www.krsay.com||</strong><br>多个链接换行即可，一行一个'));
 	$form->addInput($Projects);
 	
 	$catalog = new Typecho_Widget_Helper_Form_Element_Radio('catalog',
@@ -521,13 +521,10 @@ function today(){
     }
     $coverstory = date('Ymd').'.json'; //每日故事 json格式
     if (!file_exists($coverstory)) {
-		$stream_opts = [
-		"ssl" => [
-		"verify_peer"=>false,
-		"verify_peer_name"=>false,
-		]];
-        $json = file_get_contents("compress.zlib://".'https://rest.shanbay.com/api/v2/quote/quotes/today/',false, stream_context_create($stream_opts));
-        @file_put_contents($coverstory,$json); //写入文本
+        $http = Typecho_Http_Client::get();
+		$http->Send('https://apiv3.shanbay.com/weapps/dailyquote/quote/');
+		$shanbaytoday = $http->getResponseBody();
+        file_put_contents($coverstory,$shanbaytoday); //写入文本
     }
     $coverstory = json_decode(file_get_contents($coverstory),true);
     return $coverstory;

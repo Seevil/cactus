@@ -2,7 +2,7 @@
 <div class="mx-auto px3 my5">
  <footer id="footer" style="display:block;">
             <div class="footer-left">
-                Copyright © <?php echo date('Y'); ?> By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="http://www.xde.io" target="_blank">Xingr</a> <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/"><?php $this->options->beian();?></a><?php endif; ?>
+                Copyright © <?php echo date('Y'); ?> By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="https://www.krsay.com" target="_blank">Xingr</a> <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/"><?php $this->options->beian();?></a><?php endif; ?>
             </div>
             <div class="footer-right">
                 <nav>
@@ -26,28 +26,24 @@
 		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 		<script>	
 $(function () {
+  if (location.pathname !== "/") return;
   $.get("<?php $this->options->siteUrl();?><?php echo date('Ymd').'.json';?>", function (data) {
-    var data = data.data;
-    // var str =  data.content+'\n'
-    // + data.translation+"\n---- "
-    // +data.author +'\n'
-    var str =  data.content+'\n'
-    + data.translation+"\n---- "
-    
+    var str = (data.content || "") + "\n" + (data.translation || "");
+
     var options = {
-      strings: [ 
-        str + "Who??^1000",
-        str + "It's me^2000",
-        str +'Haha, make a joke',
-        str +data.author,
+      strings: [
+        str + "\nWelcome to my blog. ^1000",
+        str + "\nHave a good day. ^1000",
+        str + `\n---- ${data.author}. ^1000`,
       ],
       typeSpeed: 20,
-      startDelay:300,
+      startDelay: 300,
       // loop: true,
-    }
+    };
     var typed = new Typed(".description .typed", options);
-  })
-});</script>
+  });
+});
+</script>
 		<?php endif; ?>
 		<?php if ($this->is('post') || $this->is('page'))  : ?>
 		<link rel="stylesheet" href="<?php $this->options->themeUrl('css/lightbox.min.css'); ?>">
@@ -58,9 +54,7 @@ $(function () {
 		return '<a href="' + this.src + '" title="' + this.alt + '" data-lightbox="roadtrip"></a>';
 		});
 		</script>
-        <script>
-            hljs.initHighlightingOnLoad();
-        </script>
+        <script>hljs.highlightAll();</script>
        <?php endif; ?>
 	 <link rel="stylesheet" href="<?php $this->options->themeUrl('css/search.css'); ?>">
 	   <div class="searchbox">
@@ -76,9 +70,10 @@ $(function () {
 <script>
 document.addEventListener('DOMContentLoaded',function(){(function($){$('#search').click(function(){$('.searchbox').toggleClass('show')});$('.searchbox .searchbox-mask').click(function(){$('.searchbox').removeClass('show')});$('.searchbox-close').click(function(){$('.searchbox').removeClass('show')})})(jQuery)});
 </script>
-        <script>
+     <script>
 			if ('serviceWorker' in navigator) {
 			  window.addEventListener('load', function() {
+				const code = document.querySelector('#code');
 				navigator.serviceWorker.register('<?php $this->options->themeUrl('/sw.js'); ?>').then(function(registration) {
 				  console.log('ServiceWorker registration successful with scope: ', registration.scope);
 				}, function(err) {
@@ -87,6 +82,7 @@ document.addEventListener('DOMContentLoaded',function(){(function($){$('#search'
 			  });
 			}
         </script>
+		
 		<?php $this->footer(); ?>
     </body>
 </html>
