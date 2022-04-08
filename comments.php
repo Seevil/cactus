@@ -15,7 +15,7 @@ function threadedComments($comments, $options) {
     $commentLevelClass = $comments->levels > 0 ? ' comment-child' : ' comment-parent';
 ?>
 <?php
-            $host = 'https://gravatar.loli.net'; 
+            $host = 'https://sdn.geekzu.org'; 
             $url = '/avatar/'; 
             $rating = Helper::options()->commentsAvatarRating;
             $hash = md5(strtolower($comments->mail));
@@ -40,6 +40,7 @@ function threadedComments($comments, $options) {
 					<span class="vat comment-reply cp-<?php $comments->theId(); ?> text-muted comment-reply-link"><?php $comments->reply('回复'); ?></span><span id="vat cancel-comment-reply" class="cancel-comment-reply cl-<?php $comments->theId(); ?> text-muted comment-reply-link" style="display:none" ><?php $comments->cancelReply('取消'); ?></span>
 				</div>
 				<div class="vcontent">
+				<?php if ('waiting' == $comments->status): ?><div class="comment-waiting">您的评论需管理员审核后才能显示！</div><?php endif; ?>
 					<?php showCommentContent($comments->coid); ?>
 				</div>
 				

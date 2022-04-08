@@ -2,7 +2,7 @@
 <div class="mx-auto px3 my5">
  <footer id="footer" style="display:block;">
             <div class="footer-left">
-                Copyright © <?php echo date('Y'); ?> By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="https://www.krsay.com" target="_blank">Xingr</a> <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/"><?php $this->options->beian();?></a><?php endif; ?>
+                Copyright © <?php echo date('Y'); ?> By <a href="http://www.typecho.org" target="_blank" rel="nofollow">Typecho</a> & <a href="https://www.krsay.com/typecho/cactus.html" target="_blank">Xingr</a> <?php if($this->options->beian): ?><a href="https://beian.miit.gov.cn/"><?php $this->options->beian();?></a><?php endif; ?>
             </div>
             <div class="footer-right">
                 <nav>
