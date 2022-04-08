@@ -9,6 +9,14 @@
 
 主题详情：https://www.krsay.com/typecho/cactus.html
 
+版本：1.3.4
+
+头像cdn更换
+
+评论审核修复
+
+增强php8兼容性
+
 版本：1.3.3
 
 修复扇贝API ，顺便改用te自带函数获取每日数据
