@@ -73,7 +73,7 @@ function Projects($sorts = NULL) {
     if ($options->Projects) {
         $list = explode("\r\n", $options->Projects);
         foreach ($list as $val) {
-            list($name, $url, $description, $sort) = explode("|", $val);
+            list($name, $url, $description) = explode("|", $val);
             if ($sorts) {
                 $arr = explode("|", $sorts);
                 if ($sort && in_array($sort, $arr)) {
